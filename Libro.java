@@ -2,8 +2,6 @@ public class Libro {
     private String nombreLibro, nombrePersona;
     private boolean estado;
     int diaPrestamo, diaDevolucion, multa;
-    
-    
 
     Libro(String nombreLibro,String nombrePersona, boolean estado, int diaPrestamo, int diaDevolucion, int multa){
         this.nombreLibro = nombreLibro;
