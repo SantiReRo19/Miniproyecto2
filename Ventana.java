@@ -540,13 +540,12 @@ public class Ventana extends JFrame implements ActionListener {
 
     }
 
-
-    //Metodo que anima el fondo con un degradado
+    // Metodo que anima el fondo con un degradado
     public void animacionColorFondo(Container c, Color initialColor) {
         comparacion = new Color(initialColor.getRed() - 59, initialColor.getGreen() - 59,
                 initialColor.getBlue() - 59);
 
-        timer = new Timer(0, new ActionListener() {
+        timer = new Timer(10, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (initialColor.getRed() == comparacion.getRed() &&
                         initialColor.getGreen() == comparacion.getGreen() &&
