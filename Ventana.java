@@ -16,14 +16,15 @@ public class Ventana extends JFrame implements ActionListener {
     Container contenedor, contenedorAux, contenedor1;
     JLabel Mensaje, TipoU, mensaje1, usuario, contrasena, bienvenida, NuevoU, NuevaC, decision, Prestar, Devolver,
             pMora;
-    JButton BMaestro, BNormal, confirmar, prestar, devolver, Pmora, prestamo, aceptar, aceptar1, devolucion, Pmulta, Crear, salir;
+    JButton BMaestro, BNormal, confirmar, prestar, devolver, Pmora, prestamo, aceptar, aceptar1, devolucion, Pmulta,
+            Crear, salir;
     JLabel libros, terror, clasicos, ingenieria, genero, indice, persona, Plibro, Nlibros, terrorN, clasicosN,
             ingenieriaN;
     JLabel Dlibro, generoD, indiceD, personaM, diaDevolucion, Npersona, Cmulta, multa, Ppersona, Pcantidad, crear;
     JTextField usser, password, UNuevo, CNuevo;
     Color Color_Botones, colorBotones2, ColorFondo, Color_Fuente, ColorTitulo2, comparacion;
     Timer timer;
-    private boolean esMaestro=false;
+    private boolean esMaestro = false;
 
     public Ventana() {
         // Paleta de Colores
@@ -195,7 +196,7 @@ public class Ventana extends JFrame implements ActionListener {
         Pmora.setBackground(Color_Botones);
         Pmora.addActionListener(this);
         Pmora.setBounds(260, 195, 105, 30);
-        
+
         salir = new JButton("Salir");
         salir.setFont(new Font("Century Gothic", Font.ITALIC + Font.BOLD, 15));
         salir.setForeground(Color.WHITE);
@@ -498,7 +499,7 @@ public class Ventana extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    public void Ventana9(){
+    public void Ventana9() {
         getContentPane().removeAll();
         setTitle("Ventana Bibliotecario Normal");
         revalidate();
@@ -579,106 +580,53 @@ public class Ventana extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    public void mostarNombresLibrosT(ArrayList<Libro> Terror){
+    public void mostarNombresLibrosT(ArrayList<Libro> Terror) {
         JTextArea areaTexto = new JTextArea();
         areaTexto.setEditable(false);
         areaTexto.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-        areaTexto.setBounds(30, 100,160,190);
-        StringBuilder nombresLibros= new StringBuilder();
-        for(Libro libro : Terror){
-            if(libro.isEstado()==true){
-                nombresLibros.append("\n" + " " + libro.getNombre() +"\n");
-                //nombresLibros.append("\n").append(" " +libro.getNombre()).append("\n");
+        areaTexto.setBounds(30, 100, 160, 190);
+        StringBuilder nombresLibros = new StringBuilder();
+        for (Libro libro : Terror) {
+            if (libro.isEstado() == true) {
+                nombresLibros.append("\n" + " " + libro.getNombre() + "\n");
+                // nombresLibros.append("\n").append(" " +libro.getNombre()).append("\n");
             }
         }
         areaTexto.setText(nombresLibros.toString());
-        
+
         contenedor.add(areaTexto);
         revalidate();
         repaint();
         setVisible(true);
     }
 
-    public void mostarNombresLibrosNoT(ArrayList<Libro> Terror){
+    public void mostarNombresLibrosNoT(ArrayList<Libro> Terror) {
         JTextArea areaTexto = new JTextArea();
         areaTexto.setEditable(false);
         areaTexto.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-        areaTexto.setBounds(30, 100,160,190);
-        StringBuilder nombresLibros= new StringBuilder();
-        for(Libro libro : Terror){
-            if(libro.isEstado()==false){
-                nombresLibros.append("\n" + " " + libro.getNombre() +"\n");
+        areaTexto.setBounds(30, 100, 160, 190);
+        StringBuilder nombresLibros = new StringBuilder();
+        for (Libro libro : Terror) {
+            if (libro.isEstado() == false) {
+                nombresLibros.append("\n" + " " + libro.getNombre() + "\n");
             }
         }
         areaTexto.setText(nombresLibros.toString());
-        
+
         contenedor.add(areaTexto);
         revalidate();
         repaint();
     }
 
-    public void mostarNombresLibrosC(ArrayList<Libro> Clasicos){
+    public void mostarNombresLibrosC(ArrayList<Libro> Clasicos) {
         JTextArea areaTexto = new JTextArea();
         areaTexto.setEditable(false);
         areaTexto.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-        areaTexto.setBounds(210, 100,160,190);
-        StringBuilder nombresLibros= new StringBuilder();
-        for(Libro libro : Clasicos){
-            if(libro.isEstado()==true){
-                nombresLibros.append("\n" + " " + libro.getNombre() +"\n");
-            }
-        }  
-        areaTexto.setText(nombresLibros.toString());
-        contenedor.add(areaTexto);
-        revalidate();
-        repaint();
-    }
-
-    public void mostarNombresLibrosNoC(ArrayList<Libro> Clasicos){
-        JTextArea areaTexto = new JTextArea();
-        areaTexto.setEditable(false);
-        areaTexto.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-        areaTexto.setBounds(210, 100,160,190);
-        StringBuilder nombresLibros= new StringBuilder();
-        for(Libro libro : Clasicos){
-            if(libro.isEstado()==false){
-                nombresLibros.append("\n" + " " + libro.getNombre() +"\n");
-            }
-        }  
-        areaTexto.setText(nombresLibros.toString());
-        contenedor.add(areaTexto);
-        revalidate();
-        repaint();
-        //setVisible(true);
-    }
-
-    public void mostarNombresLibrosI(ArrayList<Libro> Ingenieria){
-        JTextArea areaTexto = new JTextArea();
-        areaTexto.setEditable(false);
-        areaTexto.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-        areaTexto.setBounds(400, 100,275,190);
-        StringBuilder nombresLibros= new StringBuilder();
-        for(Libro libro : Ingenieria){
-            if(libro.isEstado()==true){
-                nombresLibros.append("\n" + " " + libro.getNombre() +"\n");
-            }
-        }
-        areaTexto.setText(nombresLibros.toString());
-        contenedor.add(areaTexto);
-        revalidate();
-        repaint();
-        //setVisible(true);
-    }
-
-    public void mostarNombresLibrosNoI(ArrayList<Libro> Ingenieria){
-        JTextArea areaTexto = new JTextArea();
-        areaTexto.setEditable(false);
-        areaTexto.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-        areaTexto.setBounds(390, 100,275,180);
-        StringBuilder nombresLibros= new StringBuilder();
-        for(Libro libro : Ingenieria){
-            if(libro.isEstado()==false){
-                nombresLibros.append("\n" + " " + libro.getNombre() +"\n");
+        areaTexto.setBounds(210, 100, 160, 190);
+        StringBuilder nombresLibros = new StringBuilder();
+        for (Libro libro : Clasicos) {
+            if (libro.isEstado() == true) {
+                nombresLibros.append("\n" + " " + libro.getNombre() + "\n");
             }
         }
         areaTexto.setText(nombresLibros.toString());
@@ -687,20 +635,75 @@ public class Ventana extends JFrame implements ActionListener {
         repaint();
     }
 
-    public void CambiarEstadoT(ArrayList<Libro> Terror){
-        /*for(Libro libro:Terror){
+    public void mostarNombresLibrosNoC(ArrayList<Libro> Clasicos) {
+        JTextArea areaTexto = new JTextArea();
+        areaTexto.setEditable(false);
+        areaTexto.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+        areaTexto.setBounds(210, 100, 160, 190);
+        StringBuilder nombresLibros = new StringBuilder();
+        for (Libro libro : Clasicos) {
+            if (libro.isEstado() == false) {
+                nombresLibros.append("\n" + " " + libro.getNombre() + "\n");
+            }
+        }
+        areaTexto.setText(nombresLibros.toString());
+        contenedor.add(areaTexto);
+        revalidate();
+        repaint();
+        // setVisible(true);
+    }
+
+    public void mostarNombresLibrosI(ArrayList<Libro> Ingenieria) {
+        JTextArea areaTexto = new JTextArea();
+        areaTexto.setEditable(false);
+        areaTexto.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+        areaTexto.setBounds(400, 100, 275, 190);
+        StringBuilder nombresLibros = new StringBuilder();
+        for (Libro libro : Ingenieria) {
+            if (libro.isEstado() == true) {
+                nombresLibros.append("\n" + " " + libro.getNombre() + "\n");
+            }
+        }
+        areaTexto.setText(nombresLibros.toString());
+        contenedor.add(areaTexto);
+        revalidate();
+        repaint();
+        // setVisible(true);
+    }
+
+    public void mostarNombresLibrosNoI(ArrayList<Libro> Ingenieria) {
+        JTextArea areaTexto = new JTextArea();
+        areaTexto.setEditable(false);
+        areaTexto.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+        areaTexto.setBounds(390, 100, 275, 180);
+        StringBuilder nombresLibros = new StringBuilder();
+        for (Libro libro : Ingenieria) {
+            if (libro.isEstado() == false) {
+                nombresLibros.append("\n" + " " + libro.getNombre() + "\n");
+            }
+        }
+        areaTexto.setText(nombresLibros.toString());
+        contenedor.add(areaTexto);
+        revalidate();
+        repaint();
+    }
+
+    public void CambiarEstadoT(ArrayList<Libro> Terror) {
+        /*
+         * for(Libro libro:Terror){
+         * libro.setEstado(false);
+         * }
+         */
+    }
+
+    public void CambiarEstadoC(ArrayList<Libro> Clasicos) {
+        for (Libro libro : Clasicos) {
             libro.setEstado(false);
-        }*/
-    }
-
-    public void CambiarEstadoC(ArrayList<Libro> Clasicos){
-        for(Libro libro:Clasicos){
-            libro.setEstado(false);
         }
     }
 
-    public void CambiarEstadoI(ArrayList<Libro> Ingenieria){
-        for(Libro libro:Ingenieria){
+    public void CambiarEstadoI(ArrayList<Libro> Ingenieria) {
+        for (Libro libro : Ingenieria) {
             libro.setEstado(false);
         }
     }
@@ -711,13 +714,13 @@ public class Ventana extends JFrame implements ActionListener {
         Maestro maestro = new Maestro("BibliotecaM", "189Maestro");
         boolean verificar = maestro.Cuenta(usser2, password2);
         if (verificar) {
-        	Ventana9();
-        }else {
+            Ventana9();
+        } else {
             JOptionPane.showMessageDialog(null, "Datos incorrectos");
             usser.setText(" ");
             password.setText(" ");
         }
-              
+
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -752,11 +755,11 @@ public class Ventana extends JFrame implements ActionListener {
             Ventana4();
         }
         if (pb == aceptar) {
-            if (esMaestro){
+            if (esMaestro) {
                 Ventana9();
-            }else{
+            } else {
                 Ventana2();
-            }  
+            }
         }
         if (pb == devolucion) {
             Ventana6();
@@ -764,11 +767,11 @@ public class Ventana extends JFrame implements ActionListener {
         if (pb == Pmulta) {
             Ventana8();
         }
-        if(pb==Crear){
+        if (pb == Crear) {
             Ventana1();
         }
-        if(pb==salir){
-            esMaestro=!esMaestro;
+        if (pb == salir) {
+            esMaestro = !esMaestro;
             setVisible(false);
             new Ventana().setVisible(true);
         }
