@@ -26,6 +26,8 @@ public class Maestro {
      * }
      */
 
+
+    //Valida si ambas cadenas son iguales
     public boolean Cuenta(String usser2, String password2) {
     	return usser2.equals(Usuario) && password2.equals(password1);  
     }

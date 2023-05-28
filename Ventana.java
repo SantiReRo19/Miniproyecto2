@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Ventana extends JFrame implements ActionListener {
     Maestro maestro;
-    ArrayList<Libro> biblioteca;
+    private Biblioteca biblioteca;
 
     Container contenedor, contenedorAux, contenedor1;
     JLabel Mensaje, TipoU, mensaje1, usuario, contrasena, bienvenida, NuevoU, NuevaC, decision, Prestar, Devolver,
@@ -23,6 +23,7 @@ public class Ventana extends JFrame implements ActionListener {
     private boolean esMaestro=false;
 
     public Ventana() {
+        biblioteca = new Biblioteca();
         // Paleta de Colores
         Color_Botones = new Color(100, 116, 162);
         colorBotones2 = new Color(176, 154, 148);
@@ -586,6 +587,7 @@ public class Ventana extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+    //Mostrar los libros dispobiles para el prestamo en la ventana por medio de un JTextArea
     public void mostarNombresLibrosT(ArrayList<Libro> Terror){
         JTextArea areaTexto = new JTextArea();
         areaTexto.setEditable(false);
@@ -593,32 +595,11 @@ public class Ventana extends JFrame implements ActionListener {
         areaTexto.setBounds(30, 100,160,190);
         StringBuilder nombresLibros= new StringBuilder();
         for(Libro libro : Terror){
-            if(libro.isEstado()==true){
-                nombresLibros.append("\n" + " " + libro.getNombre() +"\n");
-                //nombresLibros.append("\n").append(" " +libro.getNombre()).append("\n");
+            if(libro.isEstado()==true){ //Si el libro esta disponible se imprime el nombre en la lista de disponibles
+                nombresLibros.append("\n" + " " + libro.getNombre() +"\n"); 
             }
         }
         areaTexto.setText(nombresLibros.toString());
-        
-        contenedor.add(areaTexto);
-        revalidate();
-        repaint();
-        setVisible(true);
-    }
-
-    public void mostarNombresLibrosNoT(ArrayList<Libro> Terror){
-        JTextArea areaTexto = new JTextArea();
-        areaTexto.setEditable(false);
-        areaTexto.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-        areaTexto.setBounds(30, 100,160,190);
-        StringBuilder nombresLibros= new StringBuilder();
-        for(Libro libro: Terror){
-            if(libro.isEstado()==false){
-                nombresLibros.append("\n" + " " + libro.getNombre() +"\n");
-            }
-        }
-        areaTexto.setText(nombresLibros.toString());
-        
         contenedor.add(areaTexto);
         revalidate();
         repaint();
@@ -631,7 +612,7 @@ public class Ventana extends JFrame implements ActionListener {
         areaTexto.setBounds(210, 100,160,190);
         StringBuilder nombresLibros= new StringBuilder();
         for(Libro libro : Clasicos){
-            if(libro.isEstado()==true){
+            if(libro.isEstado()==true){//Si el libro esta disponible se imprime el nombre en la lista de disponibles
                 nombresLibros.append("\n" + " " + libro.getNombre() +"\n");
             }
         }  
@@ -640,7 +621,42 @@ public class Ventana extends JFrame implements ActionListener {
         revalidate();
         repaint();
     }
-
+    
+    public void mostarNombresLibrosI(ArrayList<Libro> Ingenieria){
+        JTextArea areaTexto = new JTextArea();
+        areaTexto.setEditable(false);
+        areaTexto.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+        areaTexto.setBounds(400, 100,275,190);
+        StringBuilder nombresLibros= new StringBuilder();
+        for(Libro libro : Ingenieria){
+            if(libro.isEstado()==true){//Si el libro esta disponible se imprime el nombre en la lista de disponibles
+                nombresLibros.append("\n" + " " + libro.getNombre() +"\n");
+            }
+        }
+        areaTexto.setText(nombresLibros.toString());
+        contenedor.add(areaTexto);
+        revalidate();
+        repaint();
+    }
+    
+     //Mostrar los libros que estan en la lista de no disponibles en la ventana por medio de un JTextArea
+    public void mostarNombresLibrosNoT(ArrayList<Libro> Terror){
+        JTextArea areaTexto = new JTextArea();
+        areaTexto.setEditable(false);
+        areaTexto.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+        areaTexto.setBounds(30, 100,160,190);
+        StringBuilder nombresLibros= new StringBuilder();
+        for(Libro libro: Terror){
+            if(libro.isEstado()==false){
+                nombresLibros.append("\n" + " " + libro.getNombre() +"\n");
+            }
+        }
+        areaTexto.setText(nombresLibros.toString());
+        contenedor.add(areaTexto);
+        revalidate();
+        repaint();
+    }
+    
     public void mostarNombresLibrosNoC(ArrayList<Libro> Clasicos){
         JTextArea areaTexto = new JTextArea();
         areaTexto.setEditable(false);
@@ -656,25 +672,6 @@ public class Ventana extends JFrame implements ActionListener {
         contenedor.add(areaTexto);
         revalidate();
         repaint();
-        //setVisible(true);
-    }
-
-    public void mostarNombresLibrosI(ArrayList<Libro> Ingenieria){
-        JTextArea areaTexto = new JTextArea();
-        areaTexto.setEditable(false);
-        areaTexto.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-        areaTexto.setBounds(400, 100,275,190);
-        StringBuilder nombresLibros= new StringBuilder();
-        for(Libro libro : Ingenieria){
-            if(libro.isEstado()==true){
-                nombresLibros.append("\n" + " " + libro.getNombre() +"\n");
-            }
-        }
-        areaTexto.setText(nombresLibros.toString());
-        contenedor.add(areaTexto);
-        revalidate();
-        repaint();
-        //setVisible(true);
     }
 
     public void mostarNombresLibrosNoI(ArrayList<Libro> Ingenieria){
@@ -694,16 +691,15 @@ public class Ventana extends JFrame implements ActionListener {
         repaint();
     }
 
+    //Asignar el libro a un usuario y cambiar el estado de a False
     public void CambiarEstadoT(ArrayList<Libro> Terror){
         for(Libro libro : Terror){
-            System.out.println(libro.getNombrePersona());
             if(libro.getNombre().equalsIgnoreCase(generoT.getText())){
                 libro.setEstado(false);
                 libro.setNombrePersona(personaT.getText());
-                System.out.println(libro.isEstado());
-                System.out.println(libro.getNombrePersona());
+                System.out.println(libro.isEstado() +libro.getNombrePersona());
             }else{
-                System.out.println(libro.isEstado());
+                System.out.println(libro.isEstado()+libro.getNombrePersona());
             }
         
         }
@@ -711,14 +707,12 @@ public class Ventana extends JFrame implements ActionListener {
 
     public void CambiarEstadoC(ArrayList<Libro> Clasicos){
         for(Libro libro : Clasicos){
-            System.out.println(libro.getNombrePersona());
             if(libro.getNombre().equalsIgnoreCase(generoT.getText())){
                 libro.setEstado(false);
                 libro.setNombrePersona(personaT.getText());
-                System.out.println(libro.isEstado());
-                System.out.println(libro.getNombrePersona());
+                System.out.println(libro.isEstado() +libro.getNombrePersona());
             }else{
-                System.out.println(libro.isEstado());
+                System.out.println(libro.isEstado()+libro.getNombrePersona());
             }
         
         }
@@ -726,39 +720,54 @@ public class Ventana extends JFrame implements ActionListener {
 
     public void CambiarEstadoI(ArrayList<Libro> Ingenieria){
         for(Libro libro : Ingenieria){
-            System.out.println(libro.getNombrePersona());
             if(libro.getNombre().equalsIgnoreCase(generoT.getText())){
                 libro.setEstado(false);
                 libro.setNombrePersona(personaT.getText());
-                System.out.println(libro.isEstado());
-                System.out.println(libro.getNombrePersona());
+                System.out.println(libro.isEstado() +libro.getNombrePersona());
             }else{
-                System.out.println(libro.isEstado());
+                System.out.println(libro.isEstado()+libro.getNombrePersona());
             }
         
         }
     }
 
+    //Devolver el libro y cambiar el estado a True
     public void CambiarEstadoNoT(ArrayList<Libro> Terror){
-
+        for(Libro libro : Terror){
+            if(libro.getNombre().equalsIgnoreCase(libroD.getText())){
+                libro.setEstado(true);
+                System.out.println(libro.isEstado()+libro.getNombrePersona());        
+            }
+        }
     }
 
     public void CambiarEstadoNoC(ArrayList<Libro> Clasicos){
-
+        for(Libro libro : Clasicos){
+            if(libro.getNombre().equalsIgnoreCase(libroD.getText())){
+                libro.setEstado(true);
+                System.out.println(libro.isEstado()+libro.getNombrePersona());        
+            }       
+        }
     }
 
     public void CambiarEstadoNoI(ArrayList<Libro> Ingenieria){
-
+        for(Libro libro : Ingenieria){
+            if(libro.getNombre().equalsIgnoreCase(libroD.getText())){
+                libro.setEstado(true);
+                System.out.println(libro.isEstado()+libro.getNombrePersona());        
+            }        
+        }
     }
 
+    //Comparar los datos ingresados en el JTextField con los valores predeterminados
     public void CompararMaestro() {
         String usser2 = usser.getText();
         String password2 = password.getText();
         Maestro maestro = new Maestro("BibliotecaM", "189Maestro");
-        boolean verificar = maestro.Cuenta(usser2, password2);
-        if (verificar) {
+        boolean verificar = maestro.Cuenta(usser2, password2);//Determinar si es true o false
+        if (verificar) {// True, continua el programa
         	Ventana9();
-        }else {
+        }else {// False, borra los datos
             JOptionPane.showMessageDialog(null, "Datos incorrectos");
             usser.setText(" ");
             password.setText(" ");
@@ -780,15 +789,15 @@ public class Ventana extends JFrame implements ActionListener {
         }
         if (pb == prestar) {
             Ventana3();
-            mostarNombresLibrosT(biblioteca = new Biblioteca().getLibrosTerror());
-            mostarNombresLibrosC(biblioteca = new Biblioteca().getLibrosClasicos());
-            mostarNombresLibrosI(biblioteca = new Biblioteca().getLibrosIngenieria());
+            mostarNombresLibrosT(biblioteca.getLibrosTerror());
+            mostarNombresLibrosC(biblioteca.getLibrosClasicos());
+            mostarNombresLibrosI(biblioteca.getLibrosIngenieria());
         }
         if (pb == devolver) {
             Ventana5();
-            mostarNombresLibrosNoT(biblioteca = new Biblioteca().getLibrosTerror());
-            mostarNombresLibrosNoC(biblioteca = new Biblioteca().getLibrosClasicos());
-            mostarNombresLibrosNoI(biblioteca = new Biblioteca().getLibrosIngenieria());
+            mostarNombresLibrosNoT(biblioteca.getLibrosTerror());
+            mostarNombresLibrosNoC(biblioteca.getLibrosClasicos());
+            mostarNombresLibrosNoI(biblioteca.getLibrosIngenieria());
         }
         if (pb == Pmora) {
             Ventana7();
@@ -798,23 +807,27 @@ public class Ventana extends JFrame implements ActionListener {
         }
         if (pb == aceptar) {
             if (esMaestro){
-                CambiarEstadoT(biblioteca);
+                CambiarEstadoT(biblioteca.getLibrosTerror());
+                CambiarEstadoC(biblioteca.getLibrosClasicos());
+                CambiarEstadoI(biblioteca.getLibrosIngenieria());
                 Ventana9();
             }else{
-                CambiarEstadoT(biblioteca = new Biblioteca().getLibrosTerror());
-                CambiarEstadoC(biblioteca = new Biblioteca().getLibrosClasicos());
-                CambiarEstadoI(biblioteca = new Biblioteca().getLibrosIngenieria());
+                CambiarEstadoT(biblioteca.getLibrosTerror());
+                CambiarEstadoC(biblioteca.getLibrosClasicos());
+                CambiarEstadoI(biblioteca.getLibrosIngenieria());
                 Ventana2();
             }  
         }
         if (pb == aceptar1) {
             if (esMaestro){
-                CambiarEstadoT(biblioteca);
+                CambiarEstadoNoT(biblioteca.getLibrosTerror());
+                CambiarEstadoNoC(biblioteca.getLibrosClasicos());
+                CambiarEstadoNoI(biblioteca.getLibrosIngenieria());
                 Ventana9();
             }else{
-                CambiarEstadoNoT(biblioteca = new Biblioteca().getLibrosTerror());
-                CambiarEstadoNoC(biblioteca = new Biblioteca().getLibrosClasicos());
-                CambiarEstadoNoI(biblioteca = new Biblioteca().getLibrosIngenieria());
+                CambiarEstadoNoT(biblioteca.getLibrosTerror());
+                CambiarEstadoNoC(biblioteca.getLibrosClasicos());
+                CambiarEstadoNoI(biblioteca.getLibrosIngenieria());
                 Ventana2();
             }  
         }
@@ -834,6 +847,8 @@ public class Ventana extends JFrame implements ActionListener {
         }
 
     }
+
+
 
     //Metodo que anima el fondo con un degradado
     public void animacionColorFondo(Container c, Color initialColor) {

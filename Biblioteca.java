@@ -41,10 +41,10 @@ public class Biblioteca {
 
     public void LibrosIngenieria(){
         Ingenieria.add(new Libro("La ingeniería es humana","-", true, 7, 0, 0));
-        Ingenieria.add(new Libro("Números Gordos en el proyecto de estructuras","-", true, 7, 0, 0));
-        Ingenieria.add(new Libro("Ciencia e ingeniería de materiales","-", true, 7, 0, 0));
-        Ingenieria.add(new Libro("Termodinámica","-", true, 7, 0, 0));
-        Ingenieria.add(new Libro("Sin energía","-", true, 7, 0, 0));
+        Ingenieria.add(new Libro("Numeros Gordos en el proyecto de estructuras","-", true, 7, 0, 0));
+        Ingenieria.add(new Libro("Ciencia e ingenieria de materiales","-", true, 7, 0, 0));
+        Ingenieria.add(new Libro("Termodinamica","-", true, 7, 0, 0));
+        Ingenieria.add(new Libro("Sin energia","-", true, 7, 0, 0));
     }
     
 
