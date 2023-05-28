@@ -1,6 +1,3 @@
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.*;
 import java.awt.Color;
 import java.awt.*;
@@ -10,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class Ventana extends JFrame implements ActionListener {
-    // Maestro maestro;
+    Maestro maestro;
     ArrayList<Libro> biblioteca;
 
     Container contenedor, contenedorAux, contenedor1;
@@ -20,7 +17,7 @@ public class Ventana extends JFrame implements ActionListener {
     JLabel libros, terror, clasicos, ingenieria, genero, indice, persona, Plibro, Nlibros, terrorN, clasicosN,
             ingenieriaN;
     JLabel Dlibro, generoD, indiceD, personaM, diaDevolucion, Npersona, Cmulta, multa, Ppersona, Pcantidad, crear;
-    JTextField usser, password, UNuevo, CNuevo;
+    JTextField usser, password, UNuevo, CNuevo, generoT, personaT, diaD, libroD;
     Color Color_Botones, colorBotones2, ColorFondo, Color_Fuente, ColorTitulo2, comparacion;
     Timer timer;
     private boolean esMaestro=false;
@@ -278,20 +275,26 @@ public class Ventana extends JFrame implements ActionListener {
         Plibro.setForeground(Color_Fuente);
         Plibro.setBounds(180, 20, 250, 30);
 
-        genero = new JLabel("°Ingrese el genero del libro: ");
+        /*genero = new JLabel("°Ingrese el genero del libro: ");
         genero.setFont(new Font("Century Gothic", Font.PLAIN, 15));
         genero.setForeground(Color_Fuente);
-        genero.setBounds(30, 65, 300, 40);
-
+        genero.setBounds(30, 65, 300, 40);*/
+        
         indice = new JLabel("°Ingrese el libro a prestar: ");
         indice.setFont(new Font("Century Gothic", Font.PLAIN, 15));
         indice.setForeground(Color_Fuente);
-        indice.setBounds(30, 105, 300, 40);
+        indice.setBounds(30, 85, 300, 40);
 
+        generoT= new JTextField();
+        generoT.setBounds(250, 85, 240, 40);
+        
         persona = new JLabel("°Ingrese el nombre de la persona: ");
         persona.setFont(new Font("Century Gothic", Font.PLAIN, 15));
         persona.setForeground(Color_Fuente);
         persona.setBounds(30, 145, 400, 50);
+
+        personaT= new JTextField();
+        personaT.setBounds(280, 145, 240, 40);
 
         aceptar = new JButton("Aceptar");
         aceptar.setFont(new Font("Century Gothic", Font.ITALIC + Font.BOLD, 15));
@@ -301,9 +304,11 @@ public class Ventana extends JFrame implements ActionListener {
         aceptar.setBounds(190, 200, 150, 40);
 
         add(Plibro);
-        add(genero);
+        //add(genero);
+        add(generoT);
         add(indice);
         add(persona);
+        add(personaT);
         add(aceptar);
 
         setSize(550, 290);
@@ -373,29 +378,37 @@ public class Ventana extends JFrame implements ActionListener {
         Dlibro.setForeground(Color_Fuente);
         Dlibro.setBounds(215, 20, 250, 30);
 
-        generoD = new JLabel("Ingrese el genero del libro: ");
+        /*generoD = new JLabel("Ingrese el genero del libro: ");
         generoD.setFont(new Font("Century Gothic", Font.PLAIN, 15));
-        generoD.setBounds(30, 80, 200, 40);
+        generoD.setBounds(30, 80, 200, 40);*/
 
         indiceD = new JLabel("Ingrese el libro a devolver:");
         indiceD.setFont(new Font("Century Gothic", Font.PLAIN, 15));
-        indiceD.setBounds(30, 125, 200, 40);
+        indiceD.setBounds(30, 85, 200, 40);
+
+        libroD = new JTextField();
+        libroD.setBounds(230, 85, 200, 40);
 
         persona = new JLabel("Ingrese el dia de devolucion: ");
         persona.setFont(new Font("Century Gothic", Font.PLAIN, 15));
         persona.setBounds(30, 170, 400, 40);
 
-        aceptar = new JButton("Aceptar");
-        aceptar.setFont(new Font("Century Gothic", Font.ITALIC + Font.BOLD, 15));
-        aceptar.setBackground(Color_Botones);
-        aceptar.addActionListener(this);
-        aceptar.setBounds(230, 230, 150, 40);
+        diaD = new JTextField();
+        diaD.setBounds(290,170,40,40);
+
+        aceptar1 = new JButton("Aceptar");
+        aceptar1.setFont(new Font("Century Gothic", Font.ITALIC + Font.BOLD, 15));
+        aceptar1.setBackground(Color_Botones);
+        aceptar1.addActionListener(this);
+        aceptar1.setBounds(230, 230, 150, 40);
 
         add(Dlibro);
-        add(generoD);
+        //add(generoD);
         add(indiceD);
+        add(libroD);
         add(persona);
-        add(aceptar);
+        add(diaD);
+        add(aceptar1);
 
         setSize(600, 350);
         setLayout(null);
@@ -471,12 +484,6 @@ public class Ventana extends JFrame implements ActionListener {
         Pcantidad.setFont(new Font("Century Gothic", Font.PLAIN, 15));
         Pcantidad.setForeground(Color_Fuente);
         Pcantidad.setBounds(50, 130, 250, 40);
-
-        /*
-         * persona = new JLabel("Ingrese el nombre de la persona a cargo del libro");
-         * persona.setFont(new Font("Century Gothic",Font.PLAIN, 15));
-         * persona.setBounds(30,140,300,40);
-         */
 
         aceptar = new JButton("Aceptar");
         aceptar.setFont(new Font("Century Gothic", Font.ITALIC + Font.BOLD, 15));
@@ -605,7 +612,7 @@ public class Ventana extends JFrame implements ActionListener {
         areaTexto.setFont(new Font("Times New Roman", Font.PLAIN, 14));
         areaTexto.setBounds(30, 100,160,190);
         StringBuilder nombresLibros= new StringBuilder();
-        for(Libro libro : Terror){
+        for(Libro libro: Terror){
             if(libro.isEstado()==false){
                 nombresLibros.append("\n" + " " + libro.getNombre() +"\n");
             }
@@ -688,21 +695,60 @@ public class Ventana extends JFrame implements ActionListener {
     }
 
     public void CambiarEstadoT(ArrayList<Libro> Terror){
-        /*for(Libro libro:Terror){
-            libro.setEstado(false);
-        }*/
+        for(Libro libro : Terror){
+            System.out.println(libro.getNombrePersona());
+            if(libro.getNombre().equalsIgnoreCase(generoT.getText())){
+                libro.setEstado(false);
+                libro.setNombrePersona(personaT.getText());
+                System.out.println(libro.isEstado());
+                System.out.println(libro.getNombrePersona());
+            }else{
+                System.out.println(libro.isEstado());
+            }
+        
+        }
     }
 
     public void CambiarEstadoC(ArrayList<Libro> Clasicos){
-        for(Libro libro:Clasicos){
-            libro.setEstado(false);
+        for(Libro libro : Clasicos){
+            System.out.println(libro.getNombrePersona());
+            if(libro.getNombre().equalsIgnoreCase(generoT.getText())){
+                libro.setEstado(false);
+                libro.setNombrePersona(personaT.getText());
+                System.out.println(libro.isEstado());
+                System.out.println(libro.getNombrePersona());
+            }else{
+                System.out.println(libro.isEstado());
+            }
+        
         }
     }
 
     public void CambiarEstadoI(ArrayList<Libro> Ingenieria){
-        for(Libro libro:Ingenieria){
-            libro.setEstado(false);
+        for(Libro libro : Ingenieria){
+            System.out.println(libro.getNombrePersona());
+            if(libro.getNombre().equalsIgnoreCase(generoT.getText())){
+                libro.setEstado(false);
+                libro.setNombrePersona(personaT.getText());
+                System.out.println(libro.isEstado());
+                System.out.println(libro.getNombrePersona());
+            }else{
+                System.out.println(libro.isEstado());
+            }
+        
         }
+    }
+
+    public void CambiarEstadoNoT(ArrayList<Libro> Terror){
+
+    }
+
+    public void CambiarEstadoNoC(ArrayList<Libro> Clasicos){
+
+    }
+
+    public void CambiarEstadoNoI(ArrayList<Libro> Ingenieria){
+
     }
 
     public void CompararMaestro() {
@@ -734,8 +780,7 @@ public class Ventana extends JFrame implements ActionListener {
         }
         if (pb == prestar) {
             Ventana3();
-            biblioteca = new Biblioteca().getLibrosTerror();
-            mostarNombresLibrosT(biblioteca);
+            mostarNombresLibrosT(biblioteca = new Biblioteca().getLibrosTerror());
             mostarNombresLibrosC(biblioteca = new Biblioteca().getLibrosClasicos());
             mostarNombresLibrosI(biblioteca = new Biblioteca().getLibrosIngenieria());
         }
@@ -753,8 +798,23 @@ public class Ventana extends JFrame implements ActionListener {
         }
         if (pb == aceptar) {
             if (esMaestro){
+                CambiarEstadoT(biblioteca);
                 Ventana9();
             }else{
+                CambiarEstadoT(biblioteca = new Biblioteca().getLibrosTerror());
+                CambiarEstadoC(biblioteca = new Biblioteca().getLibrosClasicos());
+                CambiarEstadoI(biblioteca = new Biblioteca().getLibrosIngenieria());
+                Ventana2();
+            }  
+        }
+        if (pb == aceptar1) {
+            if (esMaestro){
+                CambiarEstadoT(biblioteca);
+                Ventana9();
+            }else{
+                CambiarEstadoNoT(biblioteca = new Biblioteca().getLibrosTerror());
+                CambiarEstadoNoC(biblioteca = new Biblioteca().getLibrosClasicos());
+                CambiarEstadoNoI(biblioteca = new Biblioteca().getLibrosIngenieria());
                 Ventana2();
             }  
         }
@@ -774,7 +834,6 @@ public class Ventana extends JFrame implements ActionListener {
         }
 
     }
-
 
     //Metodo que anima el fondo con un degradado
     public void animacionColorFondo(Container c, Color initialColor) {
