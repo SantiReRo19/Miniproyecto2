@@ -3,7 +3,7 @@ public class Libro {
     private boolean estado;
     int diaPrestamo, diaDevolucion, multa;
 
-    Libro(String nombreLibro,String nombrePersona, boolean estado, int diaPrestamo, int diaDevolucion, int multa){
+    Libro(String nombreLibro, String nombrePersona, boolean estado, int diaPrestamo, int diaDevolucion, int multa) {
         this.nombreLibro = nombreLibro;
         this.nombrePersona = nombrePersona;
         this.estado = estado;
@@ -34,7 +34,7 @@ public class Libro {
 
     public void setNombrePersona(String nombrePersona) {
         this.nombrePersona = nombrePersona;
-    } 
+    }
 
     public int getDiaPrestamo() {
         return diaPrestamo;
@@ -43,7 +43,7 @@ public class Libro {
     public void setDiaPrestamo(int diaPrestamo) {
         this.diaPrestamo = diaPrestamo;
     }
-    
+
     public int getDiaDevolucion() {
         return diaDevolucion;
     }
@@ -52,7 +52,7 @@ public class Libro {
         this.diaDevolucion = diaDevolucion;
     }
 
-    public int getMulta(){
+    public int getMulta() {
         return multa;
     }
 
