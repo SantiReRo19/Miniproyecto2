@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class Ventana extends JFrame implements ActionListener {
     Maestro maestro;
+
     private Biblioteca biblioteca;
 
     Container contenedor, contenedorAux, contenedor1;
@@ -323,6 +324,7 @@ public class Ventana extends JFrame implements ActionListener {
 
     }
 
+    // Ventana De Lista de devolucion de libros
     public void Ventana5() {
         getContentPane().removeAll();
         setTitle("Devolucion libros");
@@ -370,6 +372,7 @@ public class Ventana extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+    // Ventana para la devolucion de libros
     public void Ventana6() {
         getContentPane().removeAll();
         setTitle("Devolucion libros");
@@ -834,11 +837,17 @@ public class Ventana extends JFrame implements ActionListener {
                 CambiarEstadoNoT(biblioteca.getLibrosTerror());
                 CambiarEstadoNoC(biblioteca.getLibrosClasicos());
                 CambiarEstadoNoI(biblioteca.getLibrosIngenieria());
+                GenerarMulta(biblioteca.getLibrosTerror(), biblioteca.getLibrosClasicos(),
+                        biblioteca.getLibrosIngenieria(), biblioteca.getPersonas());
+                biblioteca.personas();
                 Ventana9();
             } else {
                 CambiarEstadoNoT(biblioteca.getLibrosTerror());
                 CambiarEstadoNoC(biblioteca.getLibrosClasicos());
                 CambiarEstadoNoI(biblioteca.getLibrosIngenieria());
+                GenerarMulta(biblioteca.getLibrosTerror(), biblioteca.getLibrosClasicos(),
+                        biblioteca.getLibrosIngenieria(), biblioteca.getPersonas());
+                biblioteca.personas();
                 Ventana2();
             }
         }
@@ -883,22 +892,82 @@ public class Ventana extends JFrame implements ActionListener {
         timer.start();
     }
 
+    public void GenerarMulta(ArrayList<Libro> Terror, ArrayList<Libro> Clasicos, ArrayList<Libro> Ingenieria,
+            ArrayList<Persona> infoPersonas) {
+        System.out.println("Llegué");
+        for (Libro libro : Terror) {
+            if (libro.getNombre().equalsIgnoreCase(libroD.getText())) {
+
+                for (Persona personita : infoPersonas) {
+                    System.out.println("Llegué");
+                    personita.setNamePersona(libro.getNombrePersona());
+                    personita.setDiaDevolucion(Integer.parseInt(diaD.getText()));
+
+                    if (personita.diaDevolucion > 7) {
+                        int multita;
+                        multita = ((personita.diaDevolucion - 7) * 1000);
+                        personita.setMulta(multita);
+
+                    }
+
+                }
+
+                System.out.println(infoPersonas.size());
+
+            } else {
+                System.out.println(infoPersonas.size());
+            }
+        }
+        for (Libro libro : Clasicos) {
+            if (libro.getNombre().equalsIgnoreCase(libroD.getText())) {
+
+                for (Persona personita : infoPersonas) {
+                    System.out.println("Llegué");
+                    personita.setNamePersona(libro.getNombrePersona());
+                    personita.setDiaDevolucion(Integer.parseInt(diaD.getText()));
+
+                    if (personita.diaDevolucion > 7) {
+                        int multita;
+                        multita = ((personita.diaDevolucion - 7) * 1000);
+                        personita.setMulta(multita);
+
+                    }
+                    System.out.println(personita.getNamePersona());
+                    System.out.println(personita.getDiaDevolucion());
+                    System.out.println(personita.getDiaPrestamo());
+                    System.out.println(personita.getMulta());
+                    System.out.println("");
+
+                }
+            }
+        }
+        for (Libro libro : Ingenieria) {
+            if (libro.getNombre().equalsIgnoreCase(libroD.getText())) {
+
+                for (Persona personita : infoPersonas) {
+                    System.out.println("Llegué");
+                    personita.setNamePersona(libro.getNombrePersona());
+                    personita.setDiaDevolucion(Integer.parseInt(diaD.getText()));
+
+                    if (personita.diaDevolucion > 7) {
+                        int multita;
+                        multita = ((personita.diaDevolucion - 7) * 1000);
+                        personita.setMulta(multita);
+
+                    }
+                    System.out.println(personita.getNamePersona());
+                    System.out.println(personita.getDiaDevolucion());
+                    System.out.println(personita.getDiaPrestamo());
+                    System.out.println(personita.getMulta());
+                    System.out.println("");
+
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) {
         new Ventana();
     }
 
 }
-
-               
-
-                  
-
-                
-                   
-            
-               
-            
-         
-    // 
-
-    

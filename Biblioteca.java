@@ -1,14 +1,16 @@
 import java.util.ArrayList;
 
 public class Biblioteca {
-    private ArrayList<Libro> Terror = new ArrayList<Libro>();
+    public ArrayList<Libro> Terror = new ArrayList<Libro>();
     private ArrayList<Libro> Clasicos = new ArrayList<Libro>();
     private ArrayList<Libro> Ingenieria = new ArrayList<Libro>();
+    private ArrayList<Persona> infoPersonas = new ArrayList<Persona>();
 
     public Biblioteca() {
         LibrosTerror();
         LibrosClasicos();
         LibrosIngenieria();
+        personas();
     }
 
     public ArrayList<Libro> getLibrosTerror() {
@@ -21,6 +23,10 @@ public class Biblioteca {
 
     public ArrayList<Libro> getLibrosIngenieria() {
         return Ingenieria;
+    }
+
+    public ArrayList<Persona> getPersonas() {
+        return infoPersonas;
     }
 
     public void LibrosTerror() {
@@ -53,15 +59,8 @@ public class Biblioteca {
         return null;
     }
 
+    public void personas() {
+        infoPersonas.add(new Persona("-", 7, 0, 0));
+    }
+
 }
-/*
- * public double Multa(){
- * if(diaDevolucion<=7){
- * return 0;
- * }else{
- * multa=(diaDevolucion-7)(1000);
- * return multa;
- * }
- * 
- * return 0; +
- */
