@@ -5,6 +5,24 @@ public class Biblioteca {
     private ArrayList<Libro> Clasicos=new ArrayList<Libro>() ;
     private ArrayList<Libro> Ingenieria=new ArrayList<Libro>() ;
 
+    public Biblioteca(){
+        LibrosTerror();
+        LibrosClasicos();
+        LibrosIngenieria();
+    }
+
+    public ArrayList<Libro> getLibrosTerror(){
+        return Terror;
+    }
+    
+    public ArrayList<Libro> getLibrosClasicos(){
+        return Clasicos;
+    }
+
+    public ArrayList<Libro> getLibrosIngenieria(){
+        return Ingenieria;
+    }
+
     public void LibrosTerror(){
         Terror.add(new Libro("It", "-", true, 7, 0, 0));
         Terror.add(new Libro("El resplandor","-", true, 7, 0, 0));
@@ -23,10 +41,10 @@ public class Biblioteca {
 
     public void LibrosIngenieria(){
         Ingenieria.add(new Libro("La ingeniería es humana","-", true, 7, 0, 0));
-        Ingenieria.add(new Libro("Números Gordos en el proyecto de estructuras","-", true, 7, 0, 0));
-        Ingenieria.add(new Libro("Ciencia e ingeniería de materiales","-", true, 7, 0, 0));
-        Ingenieria.add(new Libro("Termodinámica","-", true, 7, 0, 0));
-        Ingenieria.add(new Libro("Sin energía","-", true, 7, 0, 0));
+        Ingenieria.add(new Libro("Numeros Gordos en el proyecto de estructuras","-", true, 7, 0, 0));
+        Ingenieria.add(new Libro("Ciencia e ingenieria de materiales","-", true, 7, 0, 0));
+        Ingenieria.add(new Libro("Termodinamica","-", true, 7, 0, 0));
+        Ingenieria.add(new Libro("Sin energia","-", true, 7, 0, 0));
     }
     
 
