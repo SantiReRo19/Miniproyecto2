@@ -36,28 +36,4 @@ public class Libro {
         this.nombrePersona = nombrePersona;
     }
 
-    public int getDiaPrestamo() {
-        return diaPrestamo;
-    }
-
-    public void setDiaPrestamo(int diaPrestamo) {
-        this.diaPrestamo = diaPrestamo;
-    }
-
-    public int getDiaDevolucion() {
-        return diaDevolucion;
-    }
-
-    public void setDiaDevolucion(int diaDevolucion) {
-        this.diaDevolucion = diaDevolucion;
-    }
-
-    public int getMulta() {
-        return multa;
-    }
-
-    public void setMulta(int multa) {
-        this.multa = multa;
-    }
-
 }
