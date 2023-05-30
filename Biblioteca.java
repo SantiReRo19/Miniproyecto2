@@ -31,6 +31,7 @@ public class Biblioteca {
         Terror.add(new Libro("Frankestein", "-", true, 7, 0, 0));
     }
 
+<<<<<<< HEAD
     public void LibrosClasicos() {
         Clasicos.add(new Libro("Orgullo y prejuicio", "-", true, 7, 0, 0));
         Clasicos.add(new Libro("Don quijote de la mancha", "-", true, 7, 0, 0));
@@ -45,6 +46,22 @@ public class Biblioteca {
         Ingenieria.add(new Libro("Ciencia e ingeniería de materiales", "-", true, 7, 0, 0));
         Ingenieria.add(new Libro("Termodinámi ca", "-", true, 7, 0, 0));
         Ingenieria.add(new Libro("Sin energí a", "-", true, 7, 0, 0));
+=======
+    public void LibrosClasicos(){
+        Clasicos.add(new Libro("Orgullo y prejuicio","-", true,7, 0, 0));
+        Clasicos.add(new Libro("Don quijote de la mancha","-", true,7, 0, 0));
+        Clasicos.add(new Libro("La metamorfosis","-", true, 7, 0, 0));
+        Clasicos.add(new Libro("El principito","-", true, 7, 0, 0));
+        Clasicos.add(new Libro("Crimen y castigo","-", true, 7, 0, 0));
+    }
+
+    public void LibrosIngenieria(){
+        Ingenieria.add(new Libro("La ingeniería es humana","-", true, 7, 0, 0));
+        Ingenieria.add(new Libro("Numeros Gordos en el proyecto de estructuras","-", true, 7, 0, 0));
+        Ingenieria.add(new Libro("Ciencia e ingenieria de materiales","-", true, 7, 0, 0));
+        Ingenieria.add(new Libro("Termodinamica","-", true, 7, 0, 0));
+        Ingenieria.add(new Libro("Sin energia","-", true, 7, 0, 0));
+>>>>>>> 9390fd72adeb393cc53453ed5a31132fbad5dc74
     }
 
     public String PrestarLibros() {
