@@ -15,11 +15,11 @@ public class Ventana extends JFrame implements ActionListener {
     JLabel Mensaje, TipoU, mensaje1, usuario, contrasena, bienvenida, NuevoU, NuevaC, decision, Prestar, Devolver,
             pMora;
     JButton BMaestro, BNormal, confirmar, prestar, devolver, Pmora, prestamo, aceptar, aceptar1, devolucion, Pmulta,
-            Crear, salir;
+            Crear, salir, aceptarPago;
     JLabel libros, terror, clasicos, ingenieria, genero, indice, persona, Plibro, Nlibros, terrorN, clasicosN,
             ingenieriaN;
     JLabel Dlibro, generoD, indiceD, personaM, diaDevolucion, Npersona, Cmulta, multa, Ppersona, Pcantidad, crear;
-    JTextField usser, password, UNuevo, CNuevo, generoT, personaT, diaD, libroD;
+    JTextField usser, password, UNuevo, CNuevo, generoT, personaT, diaD, libroD, nameMulta, montoMulta;
     Color Color_Botones, colorBotones2, ColorFondo, Color_Fuente, ColorTitulo2, comparacion;
     Timer timer;
     private boolean esMaestro = false;
@@ -491,23 +491,31 @@ public class Ventana extends JFrame implements ActionListener {
         Ppersona.setForeground(Color_Fuente);
         Ppersona.setBounds(50, 80, 250, 40);
 
+        nameMulta = new JTextField();
+        nameMulta.setBounds(300, 80, 250, 40);
+
         Pcantidad = new JLabel("Ingrese la cantidad a pagar: ");
         Pcantidad.setFont(new Font("Century Gothic", Font.PLAIN, 15));
         Pcantidad.setForeground(Color_Fuente);
         Pcantidad.setBounds(50, 130, 250, 40);
 
-        aceptar = new JButton("Aceptar");
-        aceptar.setFont(new Font("Century Gothic", Font.ITALIC + Font.BOLD, 15));
-        aceptar.setForeground(Color.WHITE);
-        aceptar.setBackground(Color_Botones);
-        aceptar.addActionListener(this);
-        aceptar.setBounds(230, 200, 150, 40);
+        montoMulta = new JTextField();
+        montoMulta.setBounds(300, 130, 250, 40);
+
+        aceptarPago = new JButton("Aceptar");
+        aceptarPago.setFont(new Font("Century Gothic", Font.ITALIC + Font.BOLD, 15));
+        aceptarPago.setForeground(Color.WHITE);
+        aceptarPago.setBackground(Color_Botones);
+        aceptarPago.addActionListener(this);
+        aceptarPago.setBounds(230, 200, 150, 40);
 
         add(multa);
         add(Ppersona);
+        add(nameMulta);
         add(Pcantidad);
+        add(montoMulta);
         // add(persona);
-        add(aceptar);
+        add(aceptarPago);
 
         setSize(600, 300);
         setLayout(null);
@@ -872,7 +880,16 @@ public class Ventana extends JFrame implements ActionListener {
             setVisible(false);
             new Ventana().setVisible(true);
         }
+        if (pb == aceptarPago) {
+            if (esMaestro) {
+                pagarMulta(biblioteca.getPersonas());
+                Ventana1();
 
+            } else {
+                pagarMulta(biblioteca.getPersonas());
+                Ventana2();
+            }
+        }
     }
 
     // Metodo que anima el fondo con un degradado
@@ -989,6 +1006,30 @@ public class Ventana extends JFrame implements ActionListener {
         contenedor.add(areaTexto2);
         revalidate();
         repaint();
+    }
+
+    public void pagarMulta(ArrayList<Persona> infoPersona) {
+        boolean confirmacion = false;
+        for (Persona personita : infoPersona) {
+            if (personita.getNamePersona().equalsIgnoreCase(nameMulta.getText())) {
+                if (Integer.parseInt(montoMulta.getText()) > personita.getMulta()) {
+
+                    JOptionPane.showMessageDialog(null, "Multa Pagada con un cambio de: $"
+                            + (Integer.parseInt(montoMulta.getText()) - personita.getMulta()));
+                    personita.setMulta(0);
+                    confirmacion = true;
+
+                } else {
+                    int valorMulta = personita.getMulta() - Integer.parseInt(montoMulta.getText());
+                    personita.setMulta(valorMulta);
+                    confirmacion = true;
+                }
+            }
+        }
+        if (confirmacion == false) {
+            JOptionPane.showMessageDialog(null, "Persona no encontrada");
+            Ventana7();
+        }
     }
 
     public static void main(String[] args) {
