@@ -7,9 +7,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class Ventana extends JFrame implements ActionListener {
-    Maestro maestro;
+    // public BNormal bnormal;
 
-    private Biblioteca biblioteca;
+    public BNormal bnormal;
+    public Biblioteca biblioteca;
 
     Container contenedor, contenedorAux, contenedor1;
     JLabel Mensaje, TipoU, mensaje1, usuario, contrasena, bienvenida, NuevoU, NuevaC, decision, Prestar, Devolver,
@@ -23,18 +24,27 @@ public class Ventana extends JFrame implements ActionListener {
     Color Color_Botones, colorBotones2, ColorFondo, Color_Fuente, ColorTitulo2, comparacion;
     Timer timer;
     private boolean esMaestro = false;
+    private boolean confirmacion = false;
 
-    int itr = 0;
+    int itr = 0; // Iteradores
+    int itr2 = 0;
 
     public Ventana() {
         biblioteca = new Biblioteca();
+        VentanaP();
+    }
+
+    public void VentanaP() {
+
         // Paleta de Colores
         Color_Botones = new Color(100, 116, 162);
         colorBotones2 = new Color(176, 154, 148);
         ColorFondo = new Color(195, 198, 209);
         Color_Fuente = new Color(59, 59, 76);
         ColorTitulo2 = new Color(153, 118, 105);
-
+        getContentPane().removeAll();
+        revalidate();
+        repaint();
         contenedor = getContentPane();// Ejecutar métodos sobre el contenedor, como añadir otros elementos
         animacionColorFondo(contenedor, ColorFondo);
 
@@ -387,12 +397,6 @@ public class Ventana extends JFrame implements ActionListener {
         Dlibro.setForeground(Color_Fuente);
         Dlibro.setBounds(215, 20, 250, 30);
 
-        /*
-         * generoD = new JLabel("Ingrese el genero del libro: ");
-         * generoD.setFont(new Font("Century Gothic", Font.PLAIN, 15));
-         * generoD.setBounds(30, 80, 200, 40);
-         */
-
         indiceD = new JLabel("Ingrese el libro a devolver:");
         indiceD.setFont(new Font("Century Gothic", Font.PLAIN, 15));
         indiceD.setBounds(30, 85, 200, 40);
@@ -414,7 +418,6 @@ public class Ventana extends JFrame implements ActionListener {
         aceptar1.setBounds(230, 230, 150, 40);
 
         add(Dlibro);
-        // add(generoD);
         add(indiceD);
         add(libroD);
         add(persona);
@@ -526,7 +529,7 @@ public class Ventana extends JFrame implements ActionListener {
 
     public void Ventana9() {
         getContentPane().removeAll();
-        setTitle("Ventana Bibliotecario Normal");
+        setTitle("Ventana Bibliotecario Maestro");
         revalidate();
         repaint();
         animacionColorFondo(contenedor, ColorFondo);
@@ -720,38 +723,44 @@ public class Ventana extends JFrame implements ActionListener {
             if (libro.getNombre().equalsIgnoreCase(generoT.getText())) {
                 libro.setEstado(false);
                 libro.setNombrePersona(personaT.getText());
+                confirmacion = true;
                 System.out.println(libro.isEstado() + libro.getNombrePersona());
             } else {
                 System.out.println(libro.isEstado() + libro.getNombrePersona());
             }
-
         }
     }
 
     public void CambiarEstadoC(ArrayList<Libro> Clasicos) {
+
         for (Libro libro : Clasicos) {
             if (libro.getNombre().equalsIgnoreCase(generoT.getText())) {
                 libro.setEstado(false);
                 libro.setNombrePersona(personaT.getText());
+                confirmacion = true;
                 System.out.println(libro.isEstado() + libro.getNombrePersona());
             } else {
                 System.out.println(libro.isEstado() + libro.getNombrePersona());
             }
-
         }
     }
 
     public void CambiarEstadoI(ArrayList<Libro> Ingenieria) {
+
         for (Libro libro : Ingenieria) {
             if (libro.getNombre().equalsIgnoreCase(generoT.getText())) {
                 libro.setEstado(false);
                 libro.setNombrePersona(personaT.getText());
+                confirmacion = true;
                 System.out.println(libro.isEstado() + libro.getNombrePersona());
             } else {
                 System.out.println(libro.isEstado() + libro.getNombrePersona());
             }
 
         }
+        if (confirmacion == false)
+            JOptionPane.showMessageDialog(null,
+                    "   ¡Nombre del libro no encontrado\n¡Recuerda ingresar el nombre sin espacios al inicio/final!");
     }
 
     // Devolver el libro y cambiar el estado a True
@@ -759,6 +768,7 @@ public class Ventana extends JFrame implements ActionListener {
         for (Libro libro : Terror) {
             if (libro.getNombre().equalsIgnoreCase(libroD.getText())) {
                 libro.setEstado(true);
+                confirmacion = true;
                 System.out.println(libro.isEstado() + libro.getNombrePersona());
             }
         }
@@ -768,18 +778,24 @@ public class Ventana extends JFrame implements ActionListener {
         for (Libro libro : Clasicos) {
             if (libro.getNombre().equalsIgnoreCase(libroD.getText())) {
                 libro.setEstado(true);
+                confirmacion = true;
                 System.out.println(libro.isEstado() + libro.getNombrePersona());
             }
         }
     }
 
     public void CambiarEstadoNoI(ArrayList<Libro> Ingenieria) {
+
         for (Libro libro : Ingenieria) {
             if (libro.getNombre().equalsIgnoreCase(libroD.getText())) {
                 libro.setEstado(true);
+                confirmacion = true;
                 System.out.println(libro.isEstado() + libro.getNombrePersona());
             }
         }
+        if (confirmacion == false)
+            JOptionPane.showMessageDialog(null,
+                    "   ¡Nombre del libro no encontrado\n¡Recuerda ingresar el nombre sin espacios al inicio/final!");
     }
 
     // Comparar los datos ingresados en el JTextField con los valores
@@ -793,10 +809,10 @@ public class Ventana extends JFrame implements ActionListener {
             Ventana9();
         } else {
             JOptionPane.showMessageDialog(null, "Datos incorrectos");
-            usser.setText(" ");
-            password.setText(" ");
-        }
+            usser.setText("");
+            password.setText("");
 
+        }
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -806,9 +822,11 @@ public class Ventana extends JFrame implements ActionListener {
             CompararMaestro();
         }
         if (pb == BNormal) {
-            Ventana2();
+            CompararNormal(biblioteca.getBibliotecarios());
         }
         if (pb == confirmar) {
+            crearNormal(biblioteca.getBibliotecarios());
+            biblioteca.bibliotecarios();
             Ventana9();
         }
         if (pb == prestar) {
@@ -848,22 +866,30 @@ public class Ventana extends JFrame implements ActionListener {
                 CambiarEstadoNoT(biblioteca.getLibrosTerror());
                 CambiarEstadoNoC(biblioteca.getLibrosClasicos());
                 CambiarEstadoNoI(biblioteca.getLibrosIngenieria());
+
                 // Metodo que genera la multa a la persona que figura en el libro si esta en
                 // mora
-                GenerarMulta(biblioteca.getLibrosTerror(), biblioteca.getLibrosClasicos(),
-                        biblioteca.getLibrosIngenieria(), biblioteca.getPersonas());
-                // Metodo de Biblioteca para crear una nueva persona en la lista de
-                // Mora(infoPersonas)
-                biblioteca.personas();
-                Ventana9();
+                if (confirmacion == true) {
+                    GenerarMulta(biblioteca.getLibrosTerror(), biblioteca.getLibrosClasicos(),
+                            biblioteca.getLibrosIngenieria(), biblioteca.getPersonas());
+                    // Metodo de Biblioteca para crear una nueva persona en la lista de
+                    // Mora(infoPersonas)
+                    biblioteca.personas();
+                    Ventana9();
+                } else
+                    Ventana9();
+
             } else {
                 CambiarEstadoNoT(biblioteca.getLibrosTerror());
                 CambiarEstadoNoC(biblioteca.getLibrosClasicos());
                 CambiarEstadoNoI(biblioteca.getLibrosIngenieria());
-                GenerarMulta(biblioteca.getLibrosTerror(), biblioteca.getLibrosClasicos(),
-                        biblioteca.getLibrosIngenieria(), biblioteca.getPersonas());
-                biblioteca.personas();
-                Ventana2();
+                if (confirmacion == true) {
+                    GenerarMulta(biblioteca.getLibrosTerror(), biblioteca.getLibrosClasicos(),
+                            biblioteca.getLibrosIngenieria(), biblioteca.getPersonas());
+                    biblioteca.personas();
+                    Ventana2();
+                } else
+                    Ventana2();
             }
         }
         if (pb == devolucion) {
@@ -877,13 +903,12 @@ public class Ventana extends JFrame implements ActionListener {
         }
         if (pb == salir) {
             esMaestro = !esMaestro;
-            setVisible(false);
-            new Ventana().setVisible(true);
+            VentanaP();
         }
-        if (pb == aceptarPago) {
+        if (pb == aceptarPago) {// Boton de pago de multa
             if (esMaestro) {
                 pagarMulta(biblioteca.getPersonas());
-                Ventana1();
+                Ventana9();
 
             } else {
                 pagarMulta(biblioteca.getPersonas());
@@ -916,6 +941,7 @@ public class Ventana extends JFrame implements ActionListener {
         timer.start();
     }
 
+    // Metodo que genera las multas a las personas
     public void GenerarMulta(ArrayList<Libro> Terror, ArrayList<Libro> Clasicos, ArrayList<Libro> Ingenieria,
             ArrayList<Persona> infoPersonas) {
 
@@ -976,6 +1002,7 @@ public class Ventana extends JFrame implements ActionListener {
         }
     }
 
+    // metodo que muestra las personas en Mora
     public void personasEnMora(ArrayList<Persona> infoPersona) {
 
         JTextArea areaTexto = new JTextArea();
@@ -1008,6 +1035,7 @@ public class Ventana extends JFrame implements ActionListener {
         repaint();
     }
 
+    // Metodo que ejecuta el pago de la multa a la persona asignada
     public void pagarMulta(ArrayList<Persona> infoPersona) {
         boolean confirmacion = false;
         for (Persona personita : infoPersona) {
@@ -1029,6 +1057,53 @@ public class Ventana extends JFrame implements ActionListener {
         if (confirmacion == false) {
             JOptionPane.showMessageDialog(null, "Persona no encontrada");
             Ventana7();
+        }
+    }
+
+    // metodo para crear un bibliotecario normal
+    public void crearNormal(ArrayList<BNormal> BibNormales) {
+
+        BNormal perfil = BibNormales.get(itr2);
+
+        perfil.setUsuarioN(UNuevo.getText());
+        perfil.setPasswordN(CNuevo.getText());
+
+        itr2++;
+
+        System.out.println("El iterador es :" + itr2);
+
+        for (BNormal a : BibNormales) {
+            System.out.println(a.getUsuarioN());
+            System.out.println(a.getPasswordN());
+        }
+    }
+
+    public void CompararNormal(ArrayList<BNormal> BibNormales) {
+        String usser2N = usser.getText(); // user2N es el Jtexfield de usuario normal para nombre
+        String password2N = password.getText(); // password2N es el Jtexfield de usuario normal para contraseña
+        boolean verificacion = false;
+        for (BNormal b : BibNormales) {
+
+            for (BNormal a : BibNormales) {
+                System.out.println(a.getUsuarioN());
+                System.out.println(a.getPasswordN());
+            }
+
+            if (b.getUsuarioN().equals(usser2N) && b.getPasswordN().equals(password2N)) {
+
+                System.out.println(b.getUsuarioN());
+                System.out.println(b.getPasswordN());
+                verificacion = true;
+                Ventana2();
+                break;
+
+            }
+
+        }
+        if (verificacion == false) {
+            JOptionPane.showMessageDialog(null, "Datos incorrectos");
+            usser.setText("");
+            password.setText("");
         }
     }
 

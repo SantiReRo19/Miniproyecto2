@@ -5,12 +5,14 @@ public class Biblioteca {
     private ArrayList<Libro> Clasicos = new ArrayList<Libro>();
     private ArrayList<Libro> Ingenieria = new ArrayList<Libro>();
     private ArrayList<Persona> infoPersonas = new ArrayList<Persona>();
+    public ArrayList<BNormal> BibNormales = new ArrayList<BNormal>();
 
     public Biblioteca() {
         LibrosTerror();
         LibrosClasicos();
         LibrosIngenieria();
         personas();
+        bibliotecarios();
     }
 
     public ArrayList<Libro> getLibrosTerror() {
@@ -27,6 +29,10 @@ public class Biblioteca {
 
     public ArrayList<Persona> getPersonas() {
         return infoPersonas;
+    }
+
+    public ArrayList<BNormal> getBibliotecarios() {
+        return BibNormales;
     }
 
     public void LibrosTerror() {
@@ -46,7 +52,7 @@ public class Biblioteca {
     }
 
     public void LibrosIngenieria() {
-        Ingenieria.add(new Libro("La ingeniería es humana", "-", true, 7, 0, 0));
+        Ingenieria.add(new Libro("La ingenieria es humana", "-", true, 7, 0, 0));
         Ingenieria.add(new Libro("Numeros Gordos en el proyecto de estructuras", "-", true, 7, 0, 0));
         Ingenieria.add(new Libro("Ciencia e ingenieria de materiales", "-", true, 7, 0, 0));
         Ingenieria.add(new Libro("Termodinamica", "-", true, 7, 0, 0));
@@ -61,6 +67,10 @@ public class Biblioteca {
 
     public void personas() {
         infoPersonas.add(new Persona("-", 7, 0, 0));
+    }
+
+    public void bibliotecarios() {
+        BibNormales.add(new BNormal("-", "-"));
     }
 
 }
