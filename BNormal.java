@@ -23,11 +23,6 @@ public class BNormal {
     public void setPasswordN(String passwordN) {
         this.passwordN = passwordN;
     }
-
-    /*
-     * public boolean CuentaNormal(String usser2N, String password2N) {
-     * return usser2N.equals(UsuarioN) && password2N.equals(passwordN);
-     * }
-     */
+    
 
 }

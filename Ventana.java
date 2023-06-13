@@ -11,20 +11,27 @@ public class Ventana extends JFrame implements ActionListener {
 
     public BNormal bnormal;
     public Biblioteca biblioteca;
+    public Maestro maestro;
 
     Container contenedor, contenedorAux, contenedor1;
-    JLabel Mensaje, TipoU, mensaje1, usuario, contrasena, bienvenida, NuevoU, NuevaC, decision, Prestar, Devolver,
-            pMora;
+    JLabel Mensaje, TipoU, mensaje1, contrasena, bienvenida, NuevoU, NuevaC, decision, Prestar, Devolver,
+            pMora, Agregar, Eliminar, usuario;
     JButton BMaestro, BNormal, confirmar, prestar, devolver, Pmora, prestamo, aceptar, aceptar1, devolucion, Pmulta,
-            Crear, salir, aceptarPago;
+            Crear, salir, aceptarPago, agregar, eliminar, eliminarC, cuentaEl;
     JLabel libros, terror, clasicos, ingenieria, genero, indice, persona, Plibro, Nlibros, terrorN, clasicosN,
-            ingenieriaN;
-    JLabel Dlibro, generoD, indiceD, personaM, diaDevolucion, Npersona, Cmulta, multa, Ppersona, Pcantidad, crear;
-    JTextField usser, password, UNuevo, CNuevo, generoT, personaT, diaD, libroD, nameMulta, montoMulta;
+            ingenieriaN, combo, eliminarCuenta;
+    JLabel Dlibro, generoD, indiceD, personaM, diaDevolucion, Npersona, Cmulta, multa, Ppersona, Pcantidad, crear,
+            cuentaE;
+    JTextField usser, password, UNuevo, CNuevo, generoT, personaT, diaD, libroD, nameMulta, montoMulta, tBibliotecario,
+            Ueliminar;
     Color Color_Botones, colorBotones2, ColorFondo, Color_Fuente, ColorTitulo2, comparacion;
     Timer timer;
+
+    private JComboBox<String> comboBox;
+
     private boolean esMaestro = false;
     private boolean confirmacion = false;
+    private String seleccion;
 
     int itr = 0; // Iteradores
     int itr2 = 0;
@@ -147,16 +154,29 @@ public class Ventana extends JFrame implements ActionListener {
         confirmar.setForeground(Color.WHITE);
         confirmar.setBackground(Color_Botones);
         confirmar.addActionListener(this);
-        confirmar.setBounds(175, 190, 120, 50);
+        confirmar.setBounds(175, 270, 120, 50);
+
+        combo = new JLabel("Tipo de usuario: ");
+        combo.setFont(new Font("Century Gothic", Font.PLAIN, 15));
+        combo.setForeground(Color_Fuente);
+        combo.setBounds(20, 180, 300, 40);
+
+        comboBox = new JComboBox<>();
+        comboBox.addItem("Bibliotecario Maestro");
+        comboBox.addItem("Bibliotecario Normal");
+        comboBox.setFont(new Font("Century Gothic", Font.PLAIN, 15));
+        comboBox.setBounds(240, 185, 200, 30);
 
         add(bienvenida);
         add(NuevoU);
         add(NuevaC);
         add(UNuevo);
         add(CNuevo);
+        add(combo);
         add(confirmar);
+        add(comboBox);
 
-        setSize(470, 300);
+        setSize(470, 400);
         setLayout(null);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -208,12 +228,34 @@ public class Ventana extends JFrame implements ActionListener {
         Pmora.addActionListener(this);
         Pmora.setBounds(260, 195, 105, 30);
 
+        Agregar = new JLabel("Agregar un libro");
+        Agregar.setFont(new Font("Century Gothic", Font.PLAIN, 15));
+        Agregar.setBounds(25, 245, 150, 30);
+
+        agregar = new JButton("Agregar");
+        agregar.setFont(new Font("Century Gothic", Font.ITALIC + Font.BOLD, 15));
+        agregar.setForeground(Color.WHITE);
+        agregar.setBackground(Color_Botones);
+        agregar.addActionListener(this);
+        agregar.setBounds(260, 255, 105, 30);
+
+        Eliminar = new JLabel("Eliminar un libro");
+        Eliminar.setFont(new Font("Century Gothic", Font.PLAIN, 15));
+        Eliminar.setBounds(25, 295, 150, 30);
+
+        eliminar = new JButton("Eliminar");
+        eliminar.setFont(new Font("Century Gothic", Font.ITALIC + Font.BOLD, 15));
+        eliminar.setForeground(Color.WHITE);
+        eliminar.setBackground(Color_Botones);
+        eliminar.addActionListener(this);
+        eliminar.setBounds(260, 315, 105, 30);
+
         salir = new JButton("Salir");
         salir.setFont(new Font("Century Gothic", Font.ITALIC + Font.BOLD, 15));
         salir.setForeground(Color.WHITE);
         salir.setBackground(Color_Botones);
         salir.addActionListener(this);
-        salir.setBounds(120, 240, 105, 30);
+        salir.setBounds(120, 375, 105, 30);
 
         add(decision);
         add(Prestar);
@@ -222,9 +264,13 @@ public class Ventana extends JFrame implements ActionListener {
         add(devolver);
         add(pMora);
         add(Pmora);
+        add(Agregar);
+        add(agregar);
+        add(Eliminar);
+        add(eliminar);
         add(salir);
 
-        setSize(400, 350);
+        setSize(400, 500);
         setLayout(null);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -583,12 +629,45 @@ public class Ventana extends JFrame implements ActionListener {
         Pmora.addActionListener(this);
         Pmora.setBounds(260, 255, 105, 30);
 
+        Agregar = new JLabel("Agregar un libro");
+        Agregar.setFont(new Font("Century Gothic", Font.PLAIN, 15));
+        Agregar.setBounds(25, 315, 150, 30);
+
+        agregar = new JButton("Agregar");
+        agregar.setFont(new Font("Century Gothic", Font.ITALIC + Font.BOLD, 15));
+        agregar.setForeground(Color.WHITE);
+        agregar.setBackground(Color_Botones);
+        agregar.addActionListener(this);
+        agregar.setBounds(260, 315, 105, 30);
+
+        Eliminar = new JLabel("Eliminar un libro");
+        Eliminar.setFont(new Font("Century Gothic", Font.PLAIN, 15));
+        Eliminar.setBounds(25, 375, 150, 30);
+
+        eliminar = new JButton("Eliminar");
+        eliminar.setFont(new Font("Century Gothic", Font.ITALIC + Font.BOLD, 15));
+        eliminar.setForeground(Color.WHITE);
+        eliminar.setBackground(Color_Botones);
+        eliminar.addActionListener(this);
+        eliminar.setBounds(260, 375, 105, 30);
+
+        eliminarCuenta = new JLabel("Eliminar cuenta");
+        eliminarCuenta.setFont(new Font("Century Gothic", Font.PLAIN, 15));
+        eliminarCuenta.setBounds(25, 425, 150, 30);
+
+        eliminarC = new JButton("Eliminar");
+        eliminarC.setFont(new Font("Century Gothic", Font.ITALIC + Font.BOLD, 15));
+        eliminarC.setForeground(Color.WHITE);
+        eliminarC.setBackground(Color_Botones);
+        eliminarC.addActionListener(this);
+        eliminarC.setBounds(260, 425, 105, 30);
+
         salir = new JButton("Salir");
         salir.setFont(new Font("Century Gothic", Font.ITALIC + Font.BOLD, 15));
         salir.setForeground(Color.WHITE);
         salir.setBackground(Color_Botones);
         salir.addActionListener(this);
-        salir.setBounds(140, 300, 105, 30);
+        salir.setBounds(140, 475, 105, 30);
 
         add(decision);
         add(crear);
@@ -599,13 +678,53 @@ public class Ventana extends JFrame implements ActionListener {
         add(devolver);
         add(pMora);
         add(Pmora);
+        add(Agregar);
+        add(agregar);
+        add(Eliminar);
+        add(eliminar);
+        add(eliminarCuenta);
+        add(eliminarC);
         add(salir);
 
-        setSize(400, 400);
+        setSize(400, 560);
         setLayout(null);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
+    }
+
+    public void Ventana10() {
+        getContentPane().removeAll();
+        setTitle("Eliminar cuentas");
+        revalidate();
+        repaint();
+        animacionColorFondo(contenedor, ColorFondo);
+
+        cuentaE = new JLabel("Usuario a eliminar");
+        cuentaE.setFont(new Font("Century Gothic", Font.BOLD, 15));
+        cuentaE.setForeground(Color_Fuente);
+        cuentaE.setBounds(25, 75, 150, 30);
+
+        Ueliminar = new JTextField();
+        Ueliminar.setBounds(260, 75, 100, 30);
+
+        cuentaEl = new JButton("Eliminar");
+        cuentaEl.setFont(new Font("Century Gothic", Font.ITALIC + Font.BOLD, 15));
+        cuentaEl.setForeground(Color.WHITE);
+        cuentaEl.setBackground(Color_Botones);
+        cuentaEl.addActionListener(this);
+        cuentaEl.setBounds(120, 135, 105, 30);
+
+        add(cuentaE);
+        add(Ueliminar);
+        add(cuentaEl);
+
+        setSize(400, 560);
+        setLayout(null);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+
     }
 
     // Mostrar los libros dispobiles para el prestamo en la ventana por medio de un
@@ -798,36 +917,24 @@ public class Ventana extends JFrame implements ActionListener {
                     "   ¡Nombre del libro no encontrado\n¡Recuerda ingresar el nombre sin espacios al inicio/final!");
     }
 
-    // Comparar los datos ingresados en el JTextField con los valores
-    // predeterminados
-    public void CompararMaestro() {
-        String usser2 = usser.getText();
-        String password2 = password.getText();
-        Maestro maestro = new Maestro("BibliotecaM", "189Maestro");
-        boolean verificar = maestro.Cuenta(usser2, password2);
-        if (verificar) {
-            Ventana9();
-        } else {
-            JOptionPane.showMessageDialog(null, "Datos incorrectos");
-            usser.setText("");
-            password.setText("");
-
-        }
-    }
-
     public void actionPerformed(ActionEvent e) {
         JButton pb = (JButton) e.getSource();
         if (pb == BMaestro) {
+            maestro = new Maestro("BibliotecaM", "189Maestro");
             esMaestro = true;
-            CompararMaestro();
+            maestro.CompararMaestro(this, biblioteca.getBibliotecariosMaestro());
+            // CompararMaestro();
         }
         if (pb == BNormal) {
             CompararNormal(biblioteca.getBibliotecarios());
         }
         if (pb == confirmar) {
-            crearNormal(biblioteca.getBibliotecarios());
+            seleccion = (String) comboBox.getSelectedItem();
+            // System.out.println("Selección: " + seleccion);
+            crearUsuario(biblioteca.getBibliotecarios(), biblioteca.getBibliotecariosMaestro());
             biblioteca.bibliotecarios();
             Ventana9();
+
         }
         if (pb == prestar) {
             Ventana3();
@@ -914,6 +1021,14 @@ public class Ventana extends JFrame implements ActionListener {
                 pagarMulta(biblioteca.getPersonas());
                 Ventana2();
             }
+        }
+        if (pb == eliminarC) {
+            Ventana10();
+
+        }
+        if (pb == cuentaEl) {
+            String cuentaEliminar = Ueliminar.getText();
+            biblioteca.eliminarCuenta(cuentaEliminar, this);
         }
     }
 
@@ -1060,22 +1175,20 @@ public class Ventana extends JFrame implements ActionListener {
         }
     }
 
-    // metodo para crear un bibliotecario normal
-    public void crearNormal(ArrayList<BNormal> BibNormales) {
-
-        BNormal perfil = BibNormales.get(itr2);
-
-        perfil.setUsuarioN(UNuevo.getText());
-        perfil.setPasswordN(CNuevo.getText());
-
-        itr2++;
-
-        System.out.println("El iterador es :" + itr2);
-
-        for (BNormal a : BibNormales) {
-            System.out.println(a.getUsuarioN());
-            System.out.println(a.getPasswordN());
+    // metodo para crear un bibliotecario normal o maestro
+    public void crearUsuario(ArrayList<BNormal> BibNormales, ArrayList<Maestro> BibMaestros) {
+        String usuario = UNuevo.getText();
+        String contrasena = CNuevo.getText();
+        String tipoUsuario = (String) comboBox.getSelectedItem();
+        if (tipoUsuario.equals("Bibliotecario Maestro")) {
+            BibMaestros.add(new Maestro(usuario, contrasena));
+        } else {
+            BibNormales.add(new BNormal(usuario, contrasena));
         }
+
+        UNuevo.setText("");
+        CNuevo.setText("");
+
     }
 
     public void CompararNormal(ArrayList<BNormal> BibNormales) {

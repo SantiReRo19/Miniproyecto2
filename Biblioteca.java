@@ -1,11 +1,14 @@
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 public class Biblioteca {
     public ArrayList<Libro> Terror = new ArrayList<Libro>();
     private ArrayList<Libro> Clasicos = new ArrayList<Libro>();
     private ArrayList<Libro> Ingenieria = new ArrayList<Libro>();
     private ArrayList<Persona> infoPersonas = new ArrayList<Persona>();
     public ArrayList<BNormal> BibNormales = new ArrayList<BNormal>();
+    public ArrayList<Maestro> BibMaestros = new ArrayList<Maestro>();
 
     public Biblioteca() {
         LibrosTerror();
@@ -33,6 +36,10 @@ public class Biblioteca {
 
     public ArrayList<BNormal> getBibliotecarios() {
         return BibNormales;
+    }
+    
+    public ArrayList<Maestro> getBibliotecariosMaestro() {
+        return BibMaestros;
     }
 
     public void LibrosTerror() {
@@ -71,6 +78,42 @@ public class Biblioteca {
 
     public void bibliotecarios() {
         BibNormales.add(new BNormal("-", "-"));
+    }
+
+    public void bibliotecariosMaestro() {
+    	 BibMaestros.add(new Maestro("BibliotecaM", "189Maestro"));
+    }
+    
+    public boolean eliminarBibliotecarioNormal(String usuari) {
+        for (BNormal bibliotecario : BibNormales) {
+            if (bibliotecario.getUsuarioN().equals(usuari)) {
+                BibNormales.remove(bibliotecario);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean eliminarBibliotecarioMaestro(String usuari) {
+        for (Maestro bibliotecario : BibMaestros) {
+            if (bibliotecario.getUsuario().equals(usuari)) {
+                BibMaestros.remove(bibliotecario);
+                return true;
+            }
+        }
+        return false;
+    }
+    public void eliminarCuenta(String usuari, Ventana ventana) {
+        boolean eliminada = eliminarBibliotecarioNormal(usuari) || eliminarBibliotecarioMaestro(usuari);
+
+        if (eliminada) {
+            JOptionPane.showMessageDialog(null, "Cuenta eliminada correctamente");
+            ventana.Ventana9();
+        } else {
+            JOptionPane.showMessageDialog(null, "La cuenta no existe");
+            ventana.Ueliminar.setText("");
+            ventana.Ventana9();
+        }
     }
 
 }
