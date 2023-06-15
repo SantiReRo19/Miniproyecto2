@@ -1,9 +1,9 @@
 import javax.swing.*;
-import java.awt.Color;
+
 import java.awt.*;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 public class Ventana extends JFrame implements ActionListener {
@@ -26,6 +26,9 @@ public class Ventana extends JFrame implements ActionListener {
             Ueliminar;
     Color Color_Botones, colorBotones2, ColorFondo, Color_Fuente, ColorTitulo2, comparacion;
     Timer timer;
+
+    JMenu menu1;
+    JMenuItem i1,i2,i3;
 
     private JComboBox<String> comboBox;
 
@@ -276,7 +279,82 @@ public class Ventana extends JFrame implements ActionListener {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
     }
+     
+    public void Ventana3(){
+        getContentPane().removeAll();
+        setTitle("Prestamos libros");
+        revalidate();
+        repaint();
+        animacionColorFondo(contenedor, ColorFondo);         
 
+        JLabel jLabel = new JLabel("Libros", JLabel.CENTER);
+        getContentPane().add(jLabel);
+
+    	JMenuBar jMenuBar = new JMenuBar();
+ 
+        JMenu menuFile = new JMenu("LIBROS");
+        menuFile.setMnemonic(KeyEvent.VK_F);
+        jMenuBar.add(menuFile);
+ 
+        //MenuItem Nuevo, Abrir, Guardar abajo de File
+        JMenuItem menuItemT = new JMenuItem("Terror", KeyEvent.VK_N);
+        menuFile.add(menuItemT);
+        JMenuItem menuItemC = new JMenuItem("Clasicos", KeyEvent.VK_O);
+        menuFile.add(menuItemC);
+        JMenuItem menuItemI = new JMenuItem("Ingenieria", KeyEvent.VK_S);
+        menuFile.add(menuItemI);
+ 
+        
+         
+        setJMenuBar(jMenuBar);
+        
+        ActionListener menuActionListener = new ActionListener(){
+        	 
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jLabel.setText(e.getActionCommand());
+                if (e.getSource() == menuItemT) {
+                    getContentPane().removeAll();
+                    mostarNombresLibrosT(biblioteca.getLibrosTerror());
+                    add(prestamo);
+                    jMenuBar.setVisible(false);
+                } else if (e.getSource() == menuItemC) {
+                    getContentPane().removeAll();
+                    mostarNombresLibrosC(biblioteca.getLibrosClasicos());
+                    add(prestamo);
+                    jMenuBar.setVisible(false);
+                } else if (e.getSource() == menuItemI) {
+                    getContentPane().removeAll();
+                    mostarNombresLibrosI(biblioteca.getLibrosIngenieria());
+                    add(prestamo);
+                    jMenuBar.setVisible(false);
+        }
+            }
+             
+        };
+        
+        
+        //Agregar ActionListener
+        menuItemT.addActionListener(menuActionListener);
+        menuItemC.addActionListener(menuActionListener);
+        menuItemI.addActionListener(menuActionListener);
+
+        prestamo = new JButton("Prestar libro");
+        prestamo.setFont(new Font("Century Gothic", Font.ITALIC + Font.BOLD, 15));
+        prestamo.setForeground(Color.WHITE);
+        prestamo.setBackground(Color_Botones);
+        prestamo.addActionListener(this);
+        prestamo.setBounds(95, 290, 150, 40);
+
+        setSize(360, 425);
+        setLayout(null);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+
+    }
+    
+    /*
     public void Ventana3() {
         getContentPane().removeAll();
         setTitle("Libros disponibles");
@@ -323,7 +401,7 @@ public class Ventana extends JFrame implements ActionListener {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
     }
-
+*/
     public void Ventana4() {
         getContentPane().removeAll();
         setTitle("Prestamo libros");
@@ -383,7 +461,81 @@ public class Ventana extends JFrame implements ActionListener {
     }
 
     // Ventana De Lista de devolucion de libros
-    public void Ventana5() {
+    public void Ventana5(){
+        getContentPane().removeAll();
+        setTitle("Devolucion libros");
+        revalidate();
+        repaint();
+        animacionColorFondo(contenedor, ColorFondo);         
+
+        JLabel jLabel = new JLabel("Libros", JLabel.CENTER);
+        getContentPane().add(jLabel);
+
+    	JMenuBar jMenuBar = new JMenuBar();
+ 
+        JMenu menuFile = new JMenu("LIBROS");
+        menuFile.setMnemonic(KeyEvent.VK_F);
+        jMenuBar.add(menuFile);
+ 
+        //MenuItem Nuevo, Abrir, Guardar abajo de File
+        JMenuItem menuItemT = new JMenuItem("Terror", KeyEvent.VK_N);
+        menuFile.add(menuItemT);
+        JMenuItem menuItemC = new JMenuItem("Clasicos", KeyEvent.VK_O);
+        menuFile.add(menuItemC);
+        JMenuItem menuItemI = new JMenuItem("Ingenieria", KeyEvent.VK_S);
+        menuFile.add(menuItemI);
+ 
+        
+         
+        setJMenuBar(jMenuBar);
+        
+        ActionListener menuActionListener = new ActionListener(){
+        	 
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jLabel.setText(e.getActionCommand());
+                if (e.getSource() == menuItemT) {
+                    getContentPane().removeAll();
+                    mostarNombresLibrosNoT(biblioteca.getLibrosTerror());
+                    add(devolucion);
+                    jMenuBar.setVisible(false);
+                } else if (e.getSource() == menuItemC) {
+                    getContentPane().removeAll();
+                    mostarNombresLibrosNoC(biblioteca.getLibrosClasicos());
+                    add(devolucion);
+                    jMenuBar.setVisible(false);
+                } else if (e.getSource() == menuItemI) {
+                    getContentPane().removeAll();
+                    mostarNombresLibrosNoI(biblioteca.getLibrosIngenieria());
+                    add(devolucion);
+                    jMenuBar.setVisible(false);
+        }
+            }
+             
+        };
+        
+        
+        //Agregar ActionListener
+        menuItemT.addActionListener(menuActionListener);
+        menuItemC.addActionListener(menuActionListener);
+        menuItemI.addActionListener(menuActionListener);
+
+        devolucion = new JButton("Devolver libro");
+        devolucion.setFont(new Font("Century Gothic", Font.ITALIC + Font.BOLD, 15));
+        devolucion.setForeground(Color.WHITE);
+        devolucion.setBackground(Color_Botones);
+        devolucion.addActionListener(this);
+        devolucion.setBounds(95, 290, 150, 40);
+
+        setSize(360, 425);
+        setLayout(null);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+
+    }
+
+    /*public void Ventana5() {
         getContentPane().removeAll();
         setTitle("Devolucion libros");
         revalidate();
@@ -428,7 +580,7 @@ public class Ventana extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
-    }
+    }*/
 
     // Ventana para la devolucion de libros
     public void Ventana6() {
@@ -727,13 +879,41 @@ public class Ventana extends JFrame implements ActionListener {
 
     }
 
+    /*public void Ventana11(){
+        getContentPane().removeAll();
+        setTitle("Eliminar cuentas");
+        revalidate();
+        repaint();
+        animacionColorFondo(contenedor, ColorFondo);
+
+        JLabel tit = new JLabel("AGREGAR CATEGORIA");
+        tit.setBounds(130,50,300,30);
+
+        add(tit);
+
+        setSize(400, 560);
+        setLayout(null);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+    }*/
+
+    public void AgregarC(){
+        String h;
+        h= JOptionPane.showInputDialog("Ingrese el nombre de la nueva categoria: ");
+        if (!h.isEmpty()) {
+            JLabel t = new JLabel(h);
+            JOptionPane.showMessageDialog(null,"Se ha creado la categoria: "+t +"exitosamente");
+        }
+    }
+
     // Mostrar los libros dispobiles para el prestamo en la ventana por medio de un
     // JTextArea
     public void mostarNombresLibrosT(ArrayList<Libro> Terror) {
         JTextArea areaTexto = new JTextArea();
         areaTexto.setEditable(false);
         areaTexto.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-        areaTexto.setBounds(30, 100, 160, 190);
+        areaTexto.setBounds(90, 50, 160, 190);
         StringBuilder nombresLibros = new StringBuilder();
         for (Libro libro : Terror) {
             if (libro.isEstado() == true) { // Si el libro esta disponible se imprime el nombre en la lista de
@@ -751,7 +931,7 @@ public class Ventana extends JFrame implements ActionListener {
         JTextArea areaTexto = new JTextArea();
         areaTexto.setEditable(false);
         areaTexto.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-        areaTexto.setBounds(210, 100, 160, 190);
+        areaTexto.setBounds(90, 50, 160, 190);
         StringBuilder nombresLibros = new StringBuilder();
         for (Libro libro : Clasicos) {
             if (libro.isEstado() == true) {// Si el libro esta disponible se imprime el nombre en la lista de
@@ -769,7 +949,7 @@ public class Ventana extends JFrame implements ActionListener {
         JTextArea areaTexto = new JTextArea();
         areaTexto.setEditable(false);
         areaTexto.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-        areaTexto.setBounds(400, 100, 275, 190);
+        areaTexto.setBounds(30, 50, 275, 180);
         StringBuilder nombresLibros = new StringBuilder();
         for (Libro libro : Ingenieria) {
             if (libro.isEstado() == true) {// Si el libro esta disponible se imprime el nombre en la lista de
@@ -785,11 +965,12 @@ public class Ventana extends JFrame implements ActionListener {
 
     // Mostrar los libros que estan en la lista de no disponibles en la ventana por
     // medio de un JTextArea
+    
     public void mostarNombresLibrosNoT(ArrayList<Libro> Terror) {
         JTextArea areaTexto = new JTextArea();
         areaTexto.setEditable(false);
         areaTexto.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-        areaTexto.setBounds(30, 100, 160, 190);
+        areaTexto.setBounds(90, 50, 160, 190);
         StringBuilder nombresLibros = new StringBuilder();
         for (Libro libro : Terror) {
             if (libro.isEstado() == false) {
@@ -806,7 +987,7 @@ public class Ventana extends JFrame implements ActionListener {
         JTextArea areaTexto = new JTextArea();
         areaTexto.setEditable(false);
         areaTexto.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-        areaTexto.setBounds(210, 100, 160, 190);
+        areaTexto.setBounds(90, 50, 160, 190);
         StringBuilder nombresLibros = new StringBuilder();
         for (Libro libro : Clasicos) {
             if (libro.isEstado() == false) {
@@ -823,7 +1004,7 @@ public class Ventana extends JFrame implements ActionListener {
         JTextArea areaTexto = new JTextArea();
         areaTexto.setEditable(false);
         areaTexto.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-        areaTexto.setBounds(390, 100, 275, 180);
+        areaTexto.setBounds(30, 50, 275, 180);
         StringBuilder nombresLibros = new StringBuilder();
         for (Libro libro : Ingenieria) {
             if (libro.isEstado() == false) {
@@ -883,6 +1064,7 @@ public class Ventana extends JFrame implements ActionListener {
     }
 
     // Devolver el libro y cambiar el estado a True
+    
     public void CambiarEstadoNoT(ArrayList<Libro> Terror) {
         for (Libro libro : Terror) {
             if (libro.getNombre().equalsIgnoreCase(libroD.getText())) {
@@ -917,6 +1099,7 @@ public class Ventana extends JFrame implements ActionListener {
                     "   ¡Nombre del libro no encontrado\n¡Recuerda ingresar el nombre sin espacios al inicio/final!");
     }
 
+
     public void actionPerformed(ActionEvent e) {
         JButton pb = (JButton) e.getSource();
         if (pb == BMaestro) {
@@ -938,15 +1121,9 @@ public class Ventana extends JFrame implements ActionListener {
         }
         if (pb == prestar) {
             Ventana3();
-            mostarNombresLibrosT(biblioteca.getLibrosTerror());
-            mostarNombresLibrosC(biblioteca.getLibrosClasicos());
-            mostarNombresLibrosI(biblioteca.getLibrosIngenieria());
         }
         if (pb == devolver) {
             Ventana5();
-            mostarNombresLibrosNoT(biblioteca.getLibrosTerror());
-            mostarNombresLibrosNoC(biblioteca.getLibrosClasicos());
-            mostarNombresLibrosNoI(biblioteca.getLibrosIngenieria());
         }
         if (pb == Pmora) {
             Ventana7();
@@ -957,6 +1134,7 @@ public class Ventana extends JFrame implements ActionListener {
         }
         if (pb == aceptar) {
             if (esMaestro) {
+                
                 CambiarEstadoT(biblioteca.getLibrosTerror());
                 CambiarEstadoC(biblioteca.getLibrosClasicos());
                 CambiarEstadoI(biblioteca.getLibrosIngenieria());
@@ -970,9 +1148,9 @@ public class Ventana extends JFrame implements ActionListener {
         }
         if (pb == aceptar1) {
             if (esMaestro) {
-                CambiarEstadoNoT(biblioteca.getLibrosTerror());
+                /*CambiarEstadoNoT(biblioteca.getLibrosTerror());
                 CambiarEstadoNoC(biblioteca.getLibrosClasicos());
-                CambiarEstadoNoI(biblioteca.getLibrosIngenieria());
+                CambiarEstadoNoI(biblioteca.getLibrosIngenieria());*/
 
                 // Metodo que genera la multa a la persona que figura en el libro si esta en
                 // mora
@@ -987,9 +1165,9 @@ public class Ventana extends JFrame implements ActionListener {
                     Ventana9();
 
             } else {
-                CambiarEstadoNoT(biblioteca.getLibrosTerror());
+                /*CambiarEstadoNoT(biblioteca.getLibrosTerror());
                 CambiarEstadoNoC(biblioteca.getLibrosClasicos());
-                CambiarEstadoNoI(biblioteca.getLibrosIngenieria());
+                CambiarEstadoNoI(biblioteca.getLibrosIngenieria());*/
                 if (confirmacion == true) {
                     GenerarMulta(biblioteca.getLibrosTerror(), biblioteca.getLibrosClasicos(),
                             biblioteca.getLibrosIngenieria(), biblioteca.getPersonas());
@@ -1029,6 +1207,9 @@ public class Ventana extends JFrame implements ActionListener {
         if (pb == cuentaEl) {
             String cuentaEliminar = Ueliminar.getText();
             biblioteca.eliminarCuenta(cuentaEliminar, this);
+        }
+        if(pb==agregar) {
+            AgregarC();
         }
     }
 
