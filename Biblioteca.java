@@ -3,10 +3,16 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class Biblioteca {
+    int num;
     public ArrayList<Libro> Terror = new ArrayList<Libro>();
     private ArrayList<Libro> Clasicos = new ArrayList<Libro>();
     private ArrayList<Libro> Ingenieria = new ArrayList<Libro>();
+    private ArrayList<Libro> Categoria = new ArrayList<Libro>();
+    private ArrayList<Libro> Libros = new ArrayList<Libro>();
+    
+    
     private ArrayList<Persona> infoPersonas = new ArrayList<Persona>();
+    
     public ArrayList<BNormal> BibNormales = new ArrayList<BNormal>();
     public ArrayList<Maestro> BibMaestros = new ArrayList<Maestro>();
 
@@ -18,6 +24,21 @@ public class Biblioteca {
         bibliotecarios();
     }
 
+
+    public ArrayList<Libro> getLibros() {
+        return Libros;
+    }
+
+    public void setLibros(ArrayList<Libro> libros) {
+        Libros = libros;
+    }
+    public ArrayList<Libro> getCategoria() {
+        return Categoria;
+    }
+
+    public void setCategoria(ArrayList<Libro> categoria) {
+        Categoria = categoria;
+    }
     public ArrayList<Libro> getLibrosTerror() {
         return Terror;
     }
@@ -40,6 +61,15 @@ public class Biblioteca {
     
     public ArrayList<Maestro> getBibliotecariosMaestro() {
         return BibMaestros;
+    }
+
+    public void NuevoLibro(String nom) {
+        Libros.add(new Libro("-", "-", true, 7, 0, 0));
+    }
+
+
+    public void AgregarCate(){
+
     }
 
     public void LibrosTerror() {
