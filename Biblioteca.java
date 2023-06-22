@@ -1,6 +1,7 @@
-import java.util.ArrayList;
+import java.util.*;
+import java.awt.*;
+import javax.swing.*;
 
-import javax.swing.JOptionPane;
 
 public class Biblioteca {
     public ArrayList<Libro> Terror = new ArrayList<Libro>();
@@ -9,34 +10,41 @@ public class Biblioteca {
     private ArrayList<Persona> infoPersonas = new ArrayList<Persona>();
     public ArrayList<BNormal> BibNormales = new ArrayList<BNormal>();
     public ArrayList<Maestro> BibMaestros = new ArrayList<Maestro>();
+    public HashMap<String, ArrayList<Libro>> listas = new HashMap<String, ArrayList<Libro>>();
 
-    public HashMap<String, ArrayList> listas = new HashMap<String, ArrayList<?>>();
-    listas.put("Terror", Terror);
-    listas.put("Clasicos", Clasicos);
-    listas.put("Ingenieria", Ingenieria);
-    listas.put("infoPersonas", infoPersonas);
-    listas.put("BibNormales", BibNormales);
-    listas.put("BibMaestros", BibMaestros);
+    public void HashListas (){
+        listas.put("Terror", Terror);
+        listas.put("Clasicos", Clasicos);
+        listas.put("Ingenieria", Ingenieria);
+        //listas.put("infoPersonas", infoPersonas);
+        //listas.put("BibNormales", BibNormales);
+        //listas.put("BibMaestros", BibMaestros);
+    }
 
-    ArrayList<Libro> HashTerror = (ArrayList<Libro>) listas.get("Terror");
+    public ArrayList<Libro> HashTerror = (ArrayList<Libro>) listas.get("Terror");
     ArrayList<Libro> HashClasicos = (ArrayList<Libro>) listas.get("Clasicos");
     ArrayList<Libro> HashIngenieria = (ArrayList<Libro>) listas.get("Ingenieria");
-    ArrayList<Persona> HashinfoPersonas = (ArrayList<Persona>) listas.get("infoPersonas");
-    ArrayList<BNormal> HashBibNormales = (ArrayList<BNormal>) listas.get("BibNormales");
-    ArrayList<Maestro> HashBibMaestros = (ArrayList<Maestro>) listas.get("BibMaestros");
+
     
     public void addCategory(String newLibro,String nombreCategoria){
-        ArrayList<Libro> nombreCategoria = new ArrayList<Libro>();
-        listas.put(nombreCategoria, nombreCategoria); 
+        ArrayList<Libro> CategoriaSelect = new ArrayList<Libro>();
+        listas.put(nombreCategoria, CategoriaSelect); 
 
     }
     public ArrayList<Libro> getCategoria(String nombreCategoria){
-        ArrayList<Libro> cateSelect = (ArrayList<Libro>) listas.get(nombreCategoria);
+        ArrayList<Libro> cateSelect = (ArrayList<Libro>) (listas.get(nombreCategoria));
         return cateSelect;
     }
     public void LibroCateSelec(String nombreCategoria,String newLibro){   
-        ArrayList<Libro> cateSelect = (ArrayList<Libro>) listas.get(nombreCategoria);     
+        ArrayList<Libro> cateSelect = (ArrayList<Libro>) (listas.get(nombreCategoria));     
         cateSelect.add(new Libro(newLibro, "-", true, 7, 0, 0));
+    }
+    public HashMap<String, ArrayList<Libro>>  getHashListas(){
+        return listas;
+    }
+    public ArrayList<Libro> getHashTerror(){
+        
+        return HashTerror;
     }
     
     
@@ -47,6 +55,7 @@ public class Biblioteca {
         LibrosIngenieria();
         personas();
         bibliotecarios();
+        HashListas();
     }
 
     public ArrayList<Libro> getLibrosTerror() {
@@ -134,6 +143,7 @@ public class Biblioteca {
         }
         return false;
     }
+    
     public void eliminarCuenta(String usuari, Ventana ventana) {
         boolean eliminada = eliminarBibliotecarioNormal(usuari) || eliminarBibliotecarioMaestro(usuari);
 

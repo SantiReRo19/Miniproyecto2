@@ -1,5 +1,4 @@
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -42,7 +41,20 @@ public class Ventana extends JFrame implements ActionListener {
     public Ventana() {
         biblioteca = new Biblioteca();
         VentanaP();
-    }
+        biblioteca.getLibrosTerror();
+        biblioteca.getHashListas();
+            System.out.println(biblioteca.getHashListas().get("Terror"));
+            System.out.println(biblioteca.getCategoria("Terror").get(0).getNombre());
+            System.out.println(biblioteca.getCategoria("Clasicos").get(0).getNombre());
+        System.out.println(biblioteca.HashTerror);
+            
+        String nombrePrimerLibro = biblioteca.HashTerror.get(0).getNombre();
+        System.out.println(nombrePrimerLibro);
+
+        String texto = JOptionPane.showInputDialog("Ingrese un texto:");
+        biblioteca.LibroCateSelec("Terror",texto);
+        }
+        
 
     public void VentanaP() {
 
