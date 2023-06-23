@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class BNormal {
+public class BNormal implements Serializable {
     public String UsuarioN;
     public String passwordN;
 

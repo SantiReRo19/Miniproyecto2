@@ -1,8 +1,9 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-public class Maestro {
+public class Maestro implements Serializable{
     public String Usuario;
     public String password1;
 

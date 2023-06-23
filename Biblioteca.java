@@ -1,9 +1,15 @@
 import java.util.*;
 import java.awt.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import javax.swing.*;
 
 
-public class Biblioteca {
+public class Biblioteca implements Serializable{
     public ArrayList<Libro> Terror = new ArrayList<Libro>();
     private ArrayList<Libro> Clasicos = new ArrayList<Libro>();
     private ArrayList<Libro> Ingenieria = new ArrayList<Libro>();
@@ -22,26 +28,30 @@ public class Biblioteca {
     }
 
     public ArrayList<Libro> HashTerror = (ArrayList<Libro>) listas.get("Terror");
-    ArrayList<Libro> HashClasicos = (ArrayList<Libro>) listas.get("Clasicos");
-    ArrayList<Libro> HashIngenieria = (ArrayList<Libro>) listas.get("Ingenieria");
+    public ArrayList<Libro> HashClasicos = (ArrayList<Libro>) listas.get("Clasicos");
+    public ArrayList<Libro> HashIngenieria = (ArrayList<Libro>) listas.get("Ingenieria");
+    
 
     
-    public void addCategory(String newLibro,String nombreCategoria){
+    public void addCategory(String nombreCategoria){
         ArrayList<Libro> CategoriaSelect = new ArrayList<Libro>();
         listas.put(nombreCategoria, CategoriaSelect); 
-
     }
+    
     public ArrayList<Libro> getCategoria(String nombreCategoria){
         ArrayList<Libro> cateSelect = (ArrayList<Libro>) (listas.get(nombreCategoria));
         return cateSelect;
     }
+    
     public void LibroCateSelec(String nombreCategoria,String newLibro){   
         ArrayList<Libro> cateSelect = (ArrayList<Libro>) (listas.get(nombreCategoria));     
         cateSelect.add(new Libro(newLibro, "-", true, 7, 0, 0));
     }
+    
     public HashMap<String, ArrayList<Libro>>  getHashListas(){
         return listas;
     }
+    
     public ArrayList<Libro> getHashTerror(){
         
         return HashTerror;
@@ -83,6 +93,7 @@ public class Biblioteca {
     }
 
     public void LibrosTerror() {
+        
         Terror.add(new Libro("It", "-", true, 7, 0, 0));
         Terror.add(new Libro("El resplandor", "-", true, 7, 0, 0));
         Terror.add(new Libro("El visitante", "-", true, 7, 0, 0));
@@ -125,9 +136,11 @@ public class Biblioteca {
     }
     
     public boolean eliminarBibliotecarioNormal(String usuari) {
-        for (BNormal bibliotecario : BibNormales) {
+    	ArrayList<BNormal> lista = deserializarNormal("bibnormales.bin");
+        for (BNormal bibliotecario : lista) {
             if (bibliotecario.getUsuarioN().equals(usuari)) {
-                BibNormales.remove(bibliotecario);
+                lista.remove(bibliotecario);
+                serializarCuentas(lista, "bibnormales.bin");
                 return true;
             }
         }
@@ -135,9 +148,11 @@ public class Biblioteca {
     }
 
     public boolean eliminarBibliotecarioMaestro(String usuari) {
-        for (Maestro bibliotecario : BibMaestros) {
+        ArrayList<Maestro> lista = deserializarMaestros("bibmaestros.bin");
+        for (Maestro bibliotecario : lista) {
             if (bibliotecario.getUsuario().equals(usuari)) {
-                BibMaestros.remove(bibliotecario);
+                lista.remove(bibliotecario);
+                serializarCuentas(lista, "bibnormales.bin");
                 return true;
             }
         }
@@ -156,6 +171,51 @@ public class Biblioteca {
             ventana.Ventana9();
         }
     }
+    
+    public void serializarCuentas(ArrayList<?> Bib, String nombreArchivo) {
+	    try {
+	        FileOutputStream fileOut = new FileOutputStream(nombreArchivo);
+	        ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+	        objectOut.writeObject(Bib);
+	        objectOut.close();
+	        fileOut.close();
+	        System.out.println("El ArrayList ha sido serializado y guardado en el archivo " + nombreArchivo);
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	}
+
+    public ArrayList<BNormal> deserializarNormal(String nombreArchivo) {
+        try {
+            System.out.println("Llegamos a deserializar");
+            FileInputStream fileIn = new FileInputStream(nombreArchivo);
+            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+            ArrayList<BNormal> lista = (ArrayList<BNormal>) objectIn.readObject();
+            objectIn.close();
+            fileIn.close();
+            return lista;
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public ArrayList<Maestro> deserializarMaestros(String nombreArchivo) {
+        try {
+            System.out.println("Llegamos a deserializar");
+            FileInputStream fileIn = new FileInputStream(nombreArchivo);
+            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+            ArrayList<Maestro> lista = (ArrayList<Maestro>) objectIn.readObject();
+            objectIn.close();
+            fileIn.close();
+            return lista;
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
     /*Para almacenar las listas de objetos de distintas clases en la clase Biblioteca.java, puedes crear un HashMap que tenga como clave el nombre de la clase y como valor el ArrayList correspondiente. Por ejemplo:
 
     Copy codeHashMap<String, ArrayList<?>> listas = new HashMap<String, ArrayList<?>>();
@@ -169,10 +229,7 @@ public class Biblioteca {
     ArrayList<Pelicula> listaPeliculas = (ArrayList<Pelicula>) listas.get("Pelicula");
     De esta forma, puedes acceder a la información de cada lista de manera fácil y organizada.
 
-
     Estas seguro de que se escreibe asi: HashMap<String, ArrayList<?>> listas = new HashMap<String, ArrayList<?>>();
-
-
     Sí, es correcto. La declaración de la variable 
     listas
     es un HashMap que tiene como clave un String y como valor un ArrayList de cualquier tipo de objeto (
